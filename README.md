@@ -13,4 +13,4 @@ This project is the second version of [chat-room](https://github.com/BobbyLiu66/
 #### add friend
 ![](http://odfbxgsva.bkt.clouddn.com/add-friend-react.gif)
 #### chat
-![](http://odfbxgsva.bkt.clouddn.com/chat-react.gif)
+
