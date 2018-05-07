@@ -1,0 +1,92 @@
+import React, {Component} from 'react';
+import Navbar from './component/Navbar';
+import ChatRoom from './component/ChatRoom';
+import Whiteboard from './component/Whiteboard';
+import InputPage from './component/InputPage';
+import './App.css';
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            login: true,
+            submit: true,
+            data: 'LOGIN',
+            display: {
+                status: false,
+                displayChat: false
+            }
+        };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleInputClick = this.handleInputClick.bind(this);
+
+    }
+
+    componentWillMount() {
+        window.sessionStorage.username && this.handleInputClick()
+    }
+
+
+    handleClick(event) {
+        // display chat room or whiteboard
+        if (event.target.value === "switch") {
+            this.setState({
+                display: {
+                    status: true,
+                    displayChat: !this.state.display.displayChat,
+                    displayBoard: this.state.display.displayChat,
+                }
+            });
+        }
+        // login invite room success
+        else if (event.target.value === "submit") {
+            this.setState({
+                submit: false,
+                login: false,
+                display: {
+                    status: true,
+                    displayChat: true,
+                    displayBoard: false,
+                }
+            });
+        }
+        // navbar action
+        else {
+            this.setState({
+                submit: false,
+                login: true,
+                display: {
+                    status: false,
+                    displayChat: false,
+                    displayBoard: false
+                },
+                data: event.target.value.toUpperCase()
+            })
+        }
+    }
+
+    handleInputClick() {
+        this.setState({
+            login: false,
+            submit: false,
+            display: {
+                status: true,
+                displayChat: true,
+            },
+        });
+    }
+
+
+    render() {
+        return (
+            <div className="fill">
+                {this.state.login ? <InputPage {...this.state} handleClick={this.handleInputClick}/> :
+                    <Navbar {...this.state} handleClick={this.handleClick}/>}
+                {this.state.display.status && this.state.display.displayChat && <ChatRoom/>}
+                {this.state.display.status && !this.state.display.displayChat && <Whiteboard/>}
+            </div>
+        );
+    }
+}
+
+export default App;

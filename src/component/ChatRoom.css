@@ -1,0 +1,72 @@
+.input-area {
+    height: 100%;
+}
+
+.message-area {
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.border-display {
+    background-color: #e7e7e7;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.time {
+    padding-top: 10px;
+}
+
+p {
+    word-wrap: break-word;
+}
+
+.display-area {
+    border-bottom: solid #e7e7e7 1px;
+}
+
+.left-area {
+    border-right: solid #e7e7e7 1px;
+    overflow-y: scroll;
+}
+
+.input-bar {
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 65%;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    background: red
+}
+
+.image-size {
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    display: inline-block;
+}
+
+.avatar{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.message-block{
+    margin-top: 20px;
+}
