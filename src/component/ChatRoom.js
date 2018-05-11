@@ -218,14 +218,13 @@ class ChatRoom extends Component {
 
     render() {
         return (
-            <div className="container-fluid input-area">
+            <div className="col-md-11">
 
                 <div className="row input-area">
                     <div className="col-md-3 left-area">
                         {this.displayFriend(this.state.friendList)}
                     </div>
-                    <div className="col-md-1"/>
-                    <div className="col-md-7">
+                    <div className="col-md-7 offset-1">
                         <div className="message-area" ref="messageList">
                             {this.displayMessage(this.state.chatMessage)}
                         </div>

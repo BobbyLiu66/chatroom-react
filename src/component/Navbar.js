@@ -5,15 +5,23 @@ import './Navbar.css'
 
 class Navbar extends Component {
 
+    // render() {
+    //     return (
+    //         <nav className="navbar navbar-dark bg-primary sticky-top flex-md-nowrap">
+    //             <ChatController className="justify-content-end" handleClick={this.props.handleClick}/>
+    //         </nav>
+    //     );
+    // }
     render() {
         return (
-            <nav className="navbar navbar-dark bg-primary sticky-top flex-md-nowrap">
-                {/*<button className="navbar-toggler collapsed" type="button" onClick={this.props.handleClick} value="switch">*/}
-                    {/*switch*/}
-                {/*</button>*/}
-                {this.props.display.displayBoard && <BoardController/>}
-                {this.props.display.displayChat &&
-                <ChatController className="justify-content-end" handleClick={this.props.handleClick}/>}
+            <nav className="navbar navbar-dark sticky-top bg-dark">
+                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+
+                    <ul className="navbar-nav px-3">
+                        <li className="nav-item text-nowrap">
+                            <a className="nav-link" href="#">Sign out</a>
+                        </li>
+                    </ul>
             </nav>
         );
     }
