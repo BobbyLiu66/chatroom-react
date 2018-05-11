@@ -3,6 +3,7 @@ import Navbar from './component/Navbar';
 import Slidebar from './component/Slidebar'
 import ChatRoom from './component/ChatRoom';
 import InputPage from './component/InputPage';
+import Weather from './component/Weather'
 import './App.css';
 
 class App extends Component {
@@ -25,7 +26,6 @@ class App extends Component {
     componentWillMount() {
         window.sessionStorage.username && this.handleInputClick()
     }
-
 
     handleClick(event) {
         // display chat room or whiteboard
@@ -80,6 +80,7 @@ class App extends Component {
     render() {
         return (
             <React.Fragment>
+                <Weather/>
                 {this.state.login ? <InputPage {...this.state} handleClick={this.handleInputClick}/> :
                     <React.Fragment>
                         <Navbar {...this.state} handleClick={this.handleClick}/>
