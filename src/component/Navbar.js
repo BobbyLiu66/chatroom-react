@@ -15,7 +15,7 @@ class Navbar extends Component {
     render() {
         return (
             <nav className="navbar navbar-dark sticky-top bg-dark">
-                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">USERNAME</a>
 
                     <ul className="navbar-nav px-3">
                         <li className="nav-item text-nowrap">
