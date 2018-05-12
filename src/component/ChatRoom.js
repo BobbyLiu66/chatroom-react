@@ -190,7 +190,6 @@ class ChatRoom extends Component {
                 message.friend = friendName
             });
             this.setState({friendList: [...this.state.friendList, ...data.message]});
-            console.log(this.state)
         });
 
         socket.on('NEW_MESSAGE', (data) => {

@@ -11,3 +11,6 @@
     background-color: darkgrey;
     border-radius: 50%;
 }
+.weather-card{
+    border: solid 1px;
+}

@@ -3,7 +3,7 @@ import Navbar from './component/Navbar';
 import Slidebar from './component/Slidebar'
 import ChatRoom from './component/ChatRoom';
 import InputPage from './component/InputPage';
-import Weather from './component/Weather'
+import WeatherService from './component/Weather'
 import './App.css';
 
 class App extends Component {
@@ -20,7 +20,6 @@ class App extends Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleInputClick = this.handleInputClick.bind(this);
-
     }
 
     componentWillMount() {
@@ -80,7 +79,7 @@ class App extends Component {
     render() {
         return (
             <React.Fragment>
-                <Weather/>
+                <WeatherService />
                 {this.state.login ? <InputPage {...this.state} handleClick={this.handleInputClick}/> :
                     <React.Fragment>
                         <Navbar {...this.state} handleClick={this.handleClick}/>
