@@ -2,6 +2,7 @@
     position: absolute;
     right: 50px;
     top: 60px;
+    width: 200px;
     z-index: 1;
 }
 .weather-image{
@@ -12,7 +13,11 @@
     border-radius: 50%;
 }
 .weather-card{
-    border: solid 1px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: solid 1px #e7e7e7;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+
 }
 .loading{
     /*width: 60px;*/
