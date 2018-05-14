@@ -16,11 +16,11 @@ class WeatherService extends Component {
 
     componentDidMount() {
         this.getWeather();
-        setInterval(()=>{
-        },60*60*1000);
+        setInterval(() => {
+        }, 60 * 60 * 1000);
     }
 
-    getWeather(){
+    getWeather() {
         axios({
             method: 'Get',
             url: `http://13.211.150.239:3002/weather?type=current`,
@@ -51,7 +51,7 @@ class WeatherService extends Component {
                                     <div></div>
                                 </div>
                             </div>}
-                            </div>
+                    </div>
                 </div>
 
                 <div className="row justify-content-md-center">
@@ -64,9 +64,9 @@ class WeatherService extends Component {
                             <li className="list-group-item text-center">
                                 <table className="text-center">
                                     <tbody>
-                                    <tr >
-                                        <td>High:{this.state.main.temp-273.15}°C</td>
-                                        <td>Low:{this.state.main.temp-273.15}°C</td>
+                                    <tr>
+                                        <td>High:{this.state.main.temp - 273.15}°C</td>
+                                        <td>Low:{this.state.main.temp - 273.15}°C</td>
                                     </tr>
                                     </tbody>
                                 </table>

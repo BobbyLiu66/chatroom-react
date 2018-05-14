@@ -6,6 +6,7 @@ import InputPage from './component/InputPage';
 import WeatherService from './component/Weather'
 import './App.css';
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -86,7 +87,6 @@ class App extends Component {
                         <Slidebar {...this.state}/>
                     </React.Fragment>
                 }
-
             </React.Fragment>
         );
     }

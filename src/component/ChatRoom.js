@@ -181,6 +181,7 @@ class ChatRoom extends Component {
             });
 
         });
+
         socket.on('FRIEND_LIST', (data) => {
             data.err ? alert(LOAD_FRIEND_LIST_ERROR) : this.setState({friendList: data.message});
         });
@@ -218,7 +219,6 @@ class ChatRoom extends Component {
     render() {
         return (
             <div className="col-md-11">
-
                 <div className="row input-area">
                     <div className="col-md-3 left-area">
                         {this.displayFriend(this.state.friendList)}
