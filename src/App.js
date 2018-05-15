@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from './component/Navbar';
 import Slidebar from './component/Slidebar'
-import ChatRoom from './component/ChatRoom';
+import Chat from './page/Chat';
 import InputPage from './component/InputPage';
 import WeatherService from './component/Weather'
 import './App.css';
@@ -26,7 +26,7 @@ class App extends Component {
     componentWillMount() {
         window.sessionStorage.username && this.handleInputClick()
     }
-
+    //TODO not useful anymore change the logic to react router
     handleClick(event) {
         // display chat room or whiteboard
         if (event.target.value === "switch") {
@@ -76,7 +76,7 @@ class App extends Component {
         });
     }
 
-
+    //TODO change logic to react router
     render() {
         return (
             <React.Fragment>

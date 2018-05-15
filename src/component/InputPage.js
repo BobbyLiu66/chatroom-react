@@ -49,6 +49,7 @@ class InputPage extends Component {
                 socket.emit('ADD_FRIEND', {
                     inviteName: this.state.inputValue,
                     nickname: window.sessionStorage.username,
+                    messageTime: (new Date()).getTime(),
                     event: event.target.value
                 });
             }
