@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import './InputPage.css'
 import socket from '../tools/getSocket'
+import {inputState} from "../actions";
 
 const INPUT_ERROR_STYLE = "text-danger form-text";
 
@@ -14,7 +16,15 @@ const labelMessage = {
     FRIEND: 'friend name'
 };
 
-class InputPage extends Component {
+const mapDispatchToProps = dispatch => {
+    return {inputState: () => dispatch(inputState())}
+};
+
+const mapStateToProps = state => {
+    return { currentStatus: state.currentStatus };
+};
+
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -38,14 +48,14 @@ class InputPage extends Component {
         });
         event.preventDefault();
         if (this.validateInput()) {
-            if (this.props.data === "LOGIN") {
+            if (this.props.currentStatus === "LOGIN") {
                 socket.emit('USER_LOGIN', {
                     nickname: this.state.inputValue,
                     password: this.state.inputPassword,
                     event: event.target.value
                 });
             }
-            else if (this.props.data === "FRIEND") {
+            else if (this.props.currentStatus === "FRIEND") {
                 socket.emit('ADD_FRIEND', {
                     inviteName: this.state.inputValue,
                     nickname: window.sessionStorage.username,
@@ -56,9 +66,8 @@ class InputPage extends Component {
         }
     }
 
-    handleClick(event) {
-        event.preventDefault();
-        this.props.handleClick(event)
+    handleClick() {
+        this.props.inputState()
     }
 
     handleChange(event) {
@@ -112,7 +121,7 @@ class InputPage extends Component {
                     this.setState({
                         alertMessageStatus: true,
                     });
-                    this.props.handleClick(data)
+                    this.props.inputState()
                 }.bind(this), 2000);
             }
         });
@@ -139,12 +148,11 @@ class InputPage extends Component {
         })
     }
 
-
     render() {
         return (
             <React.Fragment>
                 <div className="text-center login-page">
-                    {this.props.data !== "LOGIN" &&
+                    {window.sessionStorage.username &&
                     <button type="button" className="close close-button" aria-label="Close" onClick={this.handleClick}>
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -154,17 +162,17 @@ class InputPage extends Component {
                         <div className="alert alert-warning alert-dismissible fade show" role="alert">
                             {this.state.alertMessage}
                         </div>}
-                        <h1 className="h3 mb-3 font-weight-normal">{displayMessage[this.props.data]}</h1>
+                        <h1 className="h3 mb-3 font-weight-normal">{displayMessage[this.props.currentStatus]}</h1>
 
                         <div className="form-group">
                             <input id="inputValue" className="form-control" type="text"
-                                   placeholder={labelMessage[this.props.data]}
+                                   placeholder={labelMessage[this.props.currentStatus]}
                                    value={this.state.inputValue} onChange={this.handleChange}
                                    required autoFocus/>
                             {this.state.inputValueMessage &&
                             <span className={this.state.inputValueMessageStyle}>{this.state.inputValueMessage}</span>}
                         </div>
-                        {this.props.submit &&
+                        {this.props.currentStatus === "LOGIN" &&
                         <div className="form-group">
                             <input type="password" className="form-control" placeholder="password"
                                    value={this.state.inputPassword} onChange={this.handleChange}
@@ -187,5 +195,7 @@ class InputPage extends Component {
         )
     }
 }
+
+const InputPage = connect(mapStateToProps, mapDispatchToProps)(Login);
 
 export default InputPage;
