@@ -7,6 +7,7 @@ import './Main.css';
 import {connect} from 'react-redux'
 
 const mapStateToProps = state => {
+    console.log(state);
     return {inputPage: state.inputPage};
 };
 

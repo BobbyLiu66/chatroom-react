@@ -8,7 +8,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case INPUTSTATE:
-            return Object.assign(state, {
+            return Object.assign({
                 inputPage: !state.inputPage
             });
         default:
