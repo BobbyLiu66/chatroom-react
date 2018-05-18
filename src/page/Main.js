@@ -7,22 +7,23 @@ import './Main.css';
 import {connect} from 'react-redux'
 
 const mapStateToProps = state => {
-    console.log(state);
-    return {inputPage: state.inputPage};
+    return {inputPage: state.inputPage, currentStatus: state.currentStatus};
 };
 
-const HomePage = ({inputPage}) => {
-    return(
-    <React.Fragment>
-        {inputPage ? <InputPage/> :
-            <React.Fragment>
-                <WeatherService/>
-                <Navbar/>
-                <Slidebar/>
-            </React.Fragment>
-        }
-    </React.Fragment>
-)};
+const HomePage = ({inputPage, currentStatus}) => {
+    return (
+        <React.Fragment>
+            {(!window.sessionStorage.username && currentStatus === "LOGIN") || (currentStatus !== "LOGIN" && inputPage) ?
+                <InputPage/> :
+                <React.Fragment>
+                    <WeatherService/>
+                    <Navbar/>
+                    <Slidebar/>
+                </React.Fragment>
+            }
+        </React.Fragment>
+    )
+};
 
 const Home = connect(mapStateToProps)(HomePage);
 

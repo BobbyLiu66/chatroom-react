@@ -9,9 +9,9 @@
     padding: 5px;
     width: 60px;
     height: 60px;
-    background-color: darkgrey;
     border-radius: 50%;
 }
+
 .weather-card{
     margin-top: 10px;
     border-radius: 25px;

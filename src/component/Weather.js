@@ -37,7 +37,6 @@ class WeatherService extends Component {
         });
     }
 
-
     render() {
         return (
             <div className="weather">
