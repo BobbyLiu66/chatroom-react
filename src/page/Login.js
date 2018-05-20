@@ -1,1 +1,0 @@
-//TODO nick name or email ? login ? use pg instead of mongoDB save user info

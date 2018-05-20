@@ -44,7 +44,7 @@ class WeatherService extends Component {
                     <div className="col-md-auto">
                         {this.state.weather ? <img className="weather-image"
                                                    src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`}
-                                                   onClick={this.handleClick}/> :
+                                                   onClick={this.handleClick} alt={this.state.weather[0].description}/> :
                             <div className="lds-css ng-scope loading">
                                 <div className="lds-eclipse">
                                     <div></div>

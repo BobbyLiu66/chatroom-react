@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './Chat.css'
 import socket from '../tools/getSocket';
-import getUserColor from '../tools/getUserColor'
 import FriendList from '../component/FriendList'
 import MessageList from '../component/MessageList'
 
@@ -21,8 +20,6 @@ class Chat extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.displayMessage = this.displayMessage.bind(this);
-        this.displayFriend = this.displayFriend.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
         socket.emit('FRIEND_LIST', {nickname: window.sessionStorage.username})
     }
@@ -58,84 +55,11 @@ class Chat extends Component {
             if (friend.roomName === this.state.roomName) {
                 friend.message = message
             }
+            return friend
         });
         this.setState({
             friendList: newFriendList
         });
-    }
-
-    displayMessage(data) {
-        let flagMinutes, flag = true;
-        return data.map((chatMessage) => {
-            let displayTime;
-            let messageTime = new Date(chatMessage.messageTime);
-            if (flag || (messageTime.getMinutes() - 5) >= flagMinutes) {
-                flagMinutes = messageTime.getMinutes();
-                displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
-            }
-            flag = false;
-            const nicknameColor = {
-                background: this.getUsernameColor(window.sessionStorage.username),
-            };
-
-            const friendColor = {
-                background: chatMessage.speaker ? this.getUsernameColor(chatMessage.speaker) : "fff",
-            };
-            return (
-                <div className="row message-block" key={chatMessage.messageTime}>
-                    <div className="col-sm-12">
-                        {displayTime && <p className="text-center time">{displayTime}</p>}
-                    </div>
-
-                    <div className="col-sm-2 avatar">
-                        {chatMessage.speaker !== window.sessionStorage.username && chatMessage.speaker !== null &&
-                        <div style={friendColor}
-                             className="image-size">{chatMessage.speaker && chatMessage.speaker.slice(0, 2).toUpperCase()}</div>
-                        }
-                    </div>
-                    <div className="col-sm-8 border-display">
-                        {chatMessage.speaker === window.sessionStorage.username ?
-                            <p className="text-justify float-right">{chatMessage.messageContent}</p> :
-                            <p className="text-justify">{chatMessage.messageContent}</p>}
-                    </div>
-
-                    <div className="col-sm-2 avatar">
-                        {chatMessage.speaker === window.sessionStorage.username &&
-                        <div style={nicknameColor}
-                             className="image-size">{window.sessionStorage.username.slice(0, 2).toUpperCase()}</div>
-                        }
-                    </div>
-                </div>
-            )
-        });
-    }
-
-    displayFriend(data) {
-        return data.map((result) => {
-            let messageTime = new Date(result.message.messageTime);
-            let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
-            const friendColor = {
-                background: getUserColor(result.friend),
-            };
-            return (
-                <div className="row display-area" onClick={() => this.handleClick(result.roomName)}>
-                    <div className="col-md-3 time">
-                        <div style={friendColor}
-                             className="image-size">{result.friend.slice(0, 2).toUpperCase()}</div>
-                        {!result.message.status && result.message.speaker !== window.sessionStorage.username &&
-                        <div className="circle"/>}
-                    </div>
-                    <div className="col-md-9">
-                        <div className="row">
-                            <div className="col-md-12"><p className="text-center time">{displayTime}</p></div>
-                            <div className="col-md-12"><p
-                                className="text-truncate">{result.message.messageContent}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )
-        })
     }
 
     scrollToBottom() {
@@ -160,6 +84,7 @@ class Chat extends Component {
                     if (friend.roomName === prevData.roomName) {
                         friend.message.status = true
                     }
+                    return friend
                 });
                 return ({
                     chatMessage: data.message,
@@ -175,7 +100,8 @@ class Chat extends Component {
 
         socket.on('ADD_FRIEND_SUCCESS', (data, friendName) => {
             data.message.map((message) => {
-                message.friend = friendName
+                message.friend = friendName;
+                return message
             });
             this.setState({friendList: [...this.state.friendList, ...data.message]});
         });
@@ -185,8 +111,9 @@ class Chat extends Component {
             newFriendList.map((friend) => {
                 if (friend.roomName === data.roomName) {
                     friend.message = data;
-                    friend.roomName !== this.state.roomName ? friend.message.status = false : ''
+                    friend.roomName !== this.state.roomName ? friend.message.status = false : friend.message.status = true
                 }
+                return friend
             });
             this.setState({
                 friendList: newFriendList
