@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './Chat.css'
 import socket from '../tools/getSocket';
+import getUserColor from '../tools/getUserColor'
+import FriendList from '../component/FriendList'
+import MessageList from '../component/MessageList'
 
 const LOAD_FRIEND_LIST_ERROR = 'load friend list wrong, please try again later';
 
@@ -14,11 +17,6 @@ class Chat extends Component {
             friendList: [],
             roomName: '',
             inputArea: false,
-            COLORS: [
-                '#e21400', '#91580f', '#f8a700', '#f78b00',
-                '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-                '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-            ]
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -117,7 +115,7 @@ class Chat extends Component {
             let messageTime = new Date(result.message.messageTime);
             let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
             const friendColor = {
-                background: this.getUsernameColor(result.friend),
+                background: getUserColor(result.friend),
             };
             return (
                 <div className="row display-area" onClick={() => this.handleClick(result.roomName)}>
@@ -146,17 +144,6 @@ class Chat extends Component {
         const height = messageList.clientHeight;
         const maxScrollTop = scrollHeight - height;
         ReactDOM.findDOMNode(messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-    }
-
-    getUsernameColor(username) {
-        // Compute hash code
-        let hash = 7;
-        for (let i = 0; i < username.length; i++) {
-            hash = username.charCodeAt(i) + (hash << 5) - hash;
-        }
-        // Calculate color
-        let index = Math.abs(hash % this.state.COLORS.length);
-        return this.state.COLORS[index];
     }
 
     componentDidMount() {
@@ -221,11 +208,11 @@ class Chat extends Component {
             <div className="col-md-11">
                 <div className="row input-area">
                     <div className="col-md-3 left-area">
-                        {this.displayFriend(this.state.friendList)}
+                        <FriendList data={this.state.friendList} handleClick={this.handleClick}/>
                     </div>
                     <div className="col-md-7 offset-1">
                         <div className="message-area" ref="messageList">
-                            {this.displayMessage(this.state.chatMessage)}
+                            <MessageList data={this.state.chatMessage}/>
                         </div>
                     </div>
                 </div>

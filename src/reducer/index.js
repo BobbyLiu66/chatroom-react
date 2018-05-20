@@ -31,11 +31,6 @@ const rootReducer = (state = initialState, action) => {
                 inputPage: !state.inputPage,
                 currentStatus: 'FRIEND'
             });
-            //TODO test this
-        case GETUSERCOLOR:
-            return Object.assign({
-                getUserColor:state.getUserColor(action.payload)
-            });
         default:
             return state
     }

@@ -1,24 +1,20 @@
 import React from 'react';
+import getUserColor from '../tools/getUserColor'
 
-// class FriendList extends Comment{
-//     constructor(){
-//         super();
-//     }
-//
-//     render(){
-//
-//     }
-// }
-
-const FriendList = () => {
-    return data.map((result) => {
+const FriendList = (props) => {
+    // const click = (roomName)=>{
+    //     props.handleClick(roomName)
+    // };
+    return props.data.map((result) => {
         let messageTime = new Date(result.message.messageTime);
         let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
         const friendColor = {
-            background: this.getUsernameColor(result.friend),
+            background: getUserColor(result.friend),
         };
+
+
         return (
-            <div className="row display-area" onClick={() => this.handleClick(result.roomName)}>
+            <div className="row display-area" onClick={()=> props.handleClick(result.roomName)}>
                 <div className="col-md-3 time">
                     <div style={friendColor}
                          className="image-size">{result.friend.slice(0, 2).toUpperCase()}</div>
@@ -37,3 +33,6 @@ const FriendList = () => {
         )
     })
 };
+
+
+export default FriendList;
