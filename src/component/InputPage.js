@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import './InputPage.css'
 import socket from '../tools/getSocket'
 import {inputState} from "../actions";
+import Canvas from './Canvas';
 
 const INPUT_ERROR_STYLE = "text-danger form-text";
 
@@ -151,6 +152,7 @@ class Login extends Component {
     render() {
         return (
             <React.Fragment>
+                {/*<Canvas/>*/}
                 <div className="text-center login-page">
                     {window.sessionStorage.username &&
                     <button type="button" className="close close-button" aria-label="Close" onClick={this.handleClick}>
@@ -191,6 +193,7 @@ class Login extends Component {
                         </div>
                     </form>
                 </div>
+
             </React.Fragment>
         )
     }
