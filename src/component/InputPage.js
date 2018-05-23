@@ -152,7 +152,7 @@ class Login extends Component {
     render() {
         return (
             <React.Fragment>
-                {/*<Canvas/>*/}
+                <Canvas/>
                 <div className="text-center login-page">
                     {window.sessionStorage.username &&
                     <button type="button" className="close close-button" aria-label="Close" onClick={this.handleClick}>

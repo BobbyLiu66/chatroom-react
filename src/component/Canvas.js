@@ -1,32 +1,29 @@
 import React, {Component} from 'react';
 
 class Canvas extends Component {
-    constructor(){
+    constructor() {
         super();
         this.canvas = React.createRef();
     }
 
     componentDidMount() {
-        // 获取canvas元素
-        var canvasEl = this.canvas.current;
-        var ctx = canvasEl.getContext('2d');
+        let canvasEl = this.canvas.current;
+        let ctx = canvasEl.getContext('2d');
+        let r = 41, g = 182, b = 246;
+        let baseR = 79, baseG = 195, baseB = 247;
 
-        // canvas画布的宽 等于 可视区域的宽
         canvasEl.width = canvasEl.clientWidth;
-        // canvas画布的高 等于 可视区域的高
         canvasEl.height = canvasEl.clientHeight;
 
-        // 保存小水珠的数组
-        // 雨滴下落后散成小水珠，小水珠就是一些圆弧
-        var dropList = [];
+        let dropList = [];
 
         // 重力
         // 雨滴下落后散成小水珠，小水珠会先上升后下降，主要是因为 gravity 这个变量的缘故
-        var gravity = 0.5;
+        const gravity = 0.5;
 
         // 保存雨滴的数组
         // 每个雨滴 都是 画的一条线
-        var linelist = [];
+        let lineList = [];
 
         // 保存鼠标的坐标
         // mousePos[0] 代表x轴的值，mousePos[1] 代表y轴的值
@@ -37,7 +34,7 @@ class Canvas extends Component {
         var mouseDis = 35;
 
         // 更新一次动画，画lineNum 条雨滴，lineNum 值越大，下雨就越密集
-        var lineNum = 3;
+        var lineNum = Math.round(-10/255*r+10);
 
         // 跟随鼠标方向 变化下雨方向的 速度
         // 鼠标移动后，下雨的方向 会慢慢改变，主要靠speedx 这个变量
@@ -51,7 +48,7 @@ class Canvas extends Component {
         window.onresize = function () {
             canvasEl.width = canvasEl.clientWidth;
             canvasEl.height = canvasEl.clientHeight;
-        }
+        };
 
         //移动鼠标触发事件
         window.onmousemove = function (e) {
@@ -70,7 +67,7 @@ class Canvas extends Component {
             // 值越接近1，表示方向越向右
             // 值越接近-1，表示方向越向左
             maxspeedx = (e.clientX - canvasEl.clientWidth / 2) / (canvasEl.clientWidth / 2);
-        }
+        };
 
         // 根据参数，返回一个rgb颜色，用于给雨滴设置颜色
         function getRgb(r, g, b) {
@@ -94,16 +91,17 @@ class Canvas extends Component {
                 // 雨滴的长度
                 h: temp,
                 // 雨滴的颜色
-                color: getRgb(Math.floor(temp * 255 / 75), Math.floor(temp * 255 / 75), Math.floor(temp * 255 / 75))
+                //TODO change this opposite to the background color
+                color: getRgb(255 - r, 255 - g, 255 - b)
             };
             // 把创建好的line（雨滴）对象，添加到保存雨滴的数组
-            linelist.push(line);
+            lineList.push(line);
         }
 
         // 画一个小水珠（雨滴散开后的小水珠就是一个个的圆弧）
         function createDrop(x, y) {
             // 一个 drop 对象，代表一个圆弧
-            var drop = {
+            return {
                 // 判断是否删除，值为true就删除
                 die: false,
                 // 圆弧圆心的x坐标
@@ -117,13 +115,13 @@ class Canvas extends Component {
                 // 圆弧的半径
                 radius: Math.random() * 1.5 + 1
             };
-            return drop;
         }
 
         // 画一定数量的小水珠
         function madedrops(x, y) {
             // 随机生成一个数 maxi
             // maxi 代表要画小水珠的数量
+            //TODO
             var maxi = Math.floor(Math.random() * 5 + 5);
             for (var i = 0; i < maxi; i++) {
                 dropList.push(createDrop(x, y));
@@ -161,7 +159,7 @@ class Canvas extends Component {
 
             // 删除 die属性为ture 的数组成员
             // 可视区域外的小水珠删除掉
-            for (var i = dropList.length - 1; i >= 0; i--) {
+            for (let i = dropList.length - 1; i >= 0; i--) {
                 if (dropList[i].die) {
                     dropList.splice(i, 1);
                 }
@@ -172,7 +170,7 @@ class Canvas extends Component {
             speedx = speedx + (maxspeedx - speedx) / 50;
 
             // 根据lineNum的值，画一定数量雨滴
-            for (var i = 0; i < lineNum; i++) {
+            for (let i = 0; i < lineNum; i++) {
                 // 调用createLine 函数，参数是雨滴x坐标
                 createLine(Math.random() * 2 * canvasEl.width - (0.5 * canvasEl.width));
             }
@@ -181,7 +179,7 @@ class Canvas extends Component {
             var endLine = canvasEl.clientHeight - Math.random() * canvasEl.clientHeight / 5;
 
             // 遍历保存雨滴的数组
-            linelist.forEach(function (e) {
+            lineList.forEach(function (e) {
 
                 // 利用勾股定理 确定一个范围，在这个范围内雨滴会散开形成小水珠
                 // e.posx + speedx * e.h 是雨滴x坐标
@@ -220,9 +218,9 @@ class Canvas extends Component {
 
             // 删除 die属性为ture 的数组成员
             // 鼠标区域内的，超过结束线的，可视区域外的雨滴删除掉
-            for (var i = linelist.length - 1; i >= 0; i--) {
-                if (linelist[i].die) {
-                    linelist.splice(i, 1);
+            for (let i = lineList.length - 1; i >= 0; i--) {
+                if (lineList[i].die) {
+                    lineList.splice(i, 1);
                 }
             }
 
@@ -232,26 +230,24 @@ class Canvas extends Component {
             window.requestAnimationFrame(update);
         }
 
-        var j = 0;
-        var flag = 1;
-
+        function calculateRGBColor(color,baseColor) {
+            return color + flag * Math.round(baseColor / 100)
+        }
+        let flag = 0.1;
         function render() {
-            // rgb(3, 155, 229)
-            // rgb(3, 169, 244)
-            // rgb(41, 182, 246)
-            // rgb(79, 195, 247)
-            // rgb(179, 229, 252)
-            // rgb(225, 245, 254)
-            j += flag;
-            if (j === Math.round(225 - 3 - (225 - 3) / 100) || j === Math.round(-(225 - 3) / 100)) {
+            if(Math.round(r) === -10 || Math.round(r) === 255){
                 flag = -flag
             }
-            ctx.fillStyle = "rgb(" + ((225 - 3) / 100 + 3 + j) + "," + ((245 - 155) / 100 + 155 + j) + "," + ((254 - 229) / 100 + 229 + j) + ")";
+
+            r = calculateRGBColor(r,baseR);
+            g = calculateRGBColor(g,baseG);
+            b = calculateRGBColor(b, baseB);
+            ctx.fillStyle = getRgb(r, g, b);
             ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
 
             // 画雨滴效果
-            ctx.lineWidth = 5;
-            linelist.forEach(function (line) {
+            ctx.lineWidth = Math.round(5 * Math.random());
+            lineList.forEach(function (line) {
                 ctx.strokeStyle = line.color;
                 ctx.beginPath();
                 ctx.moveTo(line.posx, line.posy);
@@ -264,10 +260,10 @@ class Canvas extends Component {
 
             // 画雨滴散开形成小水珠效果
             ctx.lineWidth = 1;
-            ctx.strokeStyle = "#fff";
+            ctx.strokeStyle = getRgb(255-r, 255-g, 255-b);
             dropList.forEach(function (e) {
                 ctx.beginPath();
-                ctx.arc(e.posx, e.posy, e.radius, Math.random() * Math.PI * 2, 1 * Math.PI);
+                ctx.arc(e.posx, e.posy, e.radius, Math.random() * Math.PI * 2, Math.PI);
                 ctx.stroke();
             });
         }
