@@ -17,44 +17,33 @@ class Canvas extends Component {
 
         let dropList = [];
 
-        // 重力
-        // 雨滴下落后散成小水珠，小水珠会先上升后下降，主要是因为 gravity 这个变量的缘故
-        const gravity = 0.5;
+        let flag = 0.1;
 
-        // 保存雨滴的数组
-        // 每个雨滴 都是 画的一条线
+        // each drop is a line
         let lineList = [];
 
-        // 保存鼠标的坐标
-        // mousePos[0] 代表x轴的值，mousePos[1] 代表y轴的值
-        var mousePos = [0, 0];
+        // mouse position
+        let mousePos = [0, 0];
 
-        // 跟随鼠标， mouseDis 大小区域内的雨滴会消失，形成散落效果
-        // 以mousePos为圆心，mouseDis为半径，这个范围内的雨滴 都会散开，形成许多小水珠
-        var mouseDis = 35;
+        // radius of mouse position
+        let mouseDis = 35;
 
-        // 更新一次动画，画lineNum 条雨滴，lineNum 值越大，下雨就越密集
-        var lineNum = Math.round(-10/255*r+10);
+        // line number of drop line
+        let lineNum = Math.round(-10 / 255 * r + 10);
 
-        // 跟随鼠标方向 变化下雨方向的 速度
-        // 鼠标移动后，下雨的方向 会慢慢改变，主要靠speedx 这个变量
-        var speedx = 0;
+        // the speed of changing the direction of drop with mouse position
+        let speedX = 0;
 
-        // maxspeedx 为 speedx 可以取的最大值
-        // 当 speedx = maxspeedx时，下雨方向 会 随鼠标移动方向立即改变
-        var maxspeedx = 0;
+        // the maximum of changing speed
+        let maxSpeedX = 0;
 
-        // 页面大小发生变化时，重置canvas画布大小
         window.onresize = function () {
             canvasEl.width = canvasEl.clientWidth;
             canvasEl.height = canvasEl.clientHeight;
         };
 
-        //移动鼠标触发事件
         window.onmousemove = function (e) {
-            //  设置mousePos 等于 鼠标坐标
-            //  e.clientX 为距离 浏览器窗口可视区域 左边的距离
-            //  e.clientY 为距离 浏览器窗口可视区域 上边的距离
+            //get mouse position
             mousePos[0] = e.clientX;
             mousePos[1] = e.clientY;
 
@@ -66,20 +55,19 @@ class Canvas extends Component {
             // 4、小水珠的移动方向
             // 值越接近1，表示方向越向右
             // 值越接近-1，表示方向越向左
-            maxspeedx = (e.clientX - canvasEl.clientWidth / 2) / (canvasEl.clientWidth / 2);
+            maxSpeedX = (e.clientX - canvasEl.clientWidth / 2) / (canvasEl.clientWidth / 2);
         };
 
-        // 根据参数，返回一个rgb颜色，用于给雨滴设置颜色
         function getRgb(r, g, b) {
             return "rgb(" + r + "," + g + "," + b + ")";
         }
 
-        // 画 一滴雨（一条线）
+        // draw the drop rain
         function createLine(e) {
-            // 随机生成 雨滴的长度
-            var temp = 0.25 * (50 + Math.random() * 100);
+            // drop rain length
+            const dropLength = 0.25 * (50 + Math.random() * 100);
             // 一个 line 对象，代表一个雨滴
-            var line = {
+            const line = {
                 // 雨滴下落速度
                 speed: 5.5 * (Math.random() * 6 + 3),
                 // 判断是否删除，值为true就删除
@@ -89,9 +77,8 @@ class Canvas extends Component {
                 // 雨滴y坐标
                 posy: -50,
                 // 雨滴的长度
-                h: temp,
+                h: dropLength,
                 // 雨滴的颜色
-                //TODO change this opposite to the background color
                 color: getRgb(255 - r, 255 - g, 255 - b)
             };
             // 把创建好的line（雨滴）对象，添加到保存雨滴的数组
@@ -121,9 +108,8 @@ class Canvas extends Component {
         function madedrops(x, y) {
             // 随机生成一个数 maxi
             // maxi 代表要画小水珠的数量
-            //TODO
-            var maxi = Math.floor(Math.random() * 5 + 5);
-            for (var i = 0; i < maxi; i++) {
+            const maxi = Math.floor(Math.random() * 5 + 5);
+            for (let i = 0; i < maxi; i++) {
                 dropList.push(createDrop(x, y));
             }
         }
@@ -138,15 +124,15 @@ class Canvas extends Component {
                 // 遍历保存小水珠的数组
                 dropList.forEach(function (e) {
                     //设置e.vx，vx表示x坐标变化的速度
-                    // (speedx)/2 是为了，让小水珠 在x轴的移动距离短一点，看上去更真实点
+                    // (speedX)/2 是为了，让小水珠 在x轴的移动距离短一点，看上去更真实点
                     // 也使 小水珠的移动方向 和 雨滴方向，雨滴下落方向，鼠标移动方向相同
-                    e.vx = e.vx + (speedx / 2);
+                    e.vx = e.vx + (speedX / 2);
                     e.posx = e.posx + e.vx;
 
                     //设置e.vy，vy表示y坐标变化的速度
                     // e.vy的范围是-3 到 -9，而这时e.posy（y坐标）一定是正值，所以 e.posy的值会先减小后增大
                     // 也就是实现 雨滴散成小水珠，小水珠会先上升后下降的效果
-                    e.vy = e.vy + gravity;
+                    e.vy = e.vy + Math.random() / 2;
                     e.posy = e.posy + e.vy;
 
                     // 如果 小水珠y坐标 大于 可视区域的高度，设置die属性为true
@@ -166,8 +152,8 @@ class Canvas extends Component {
             }
 
             // 设置下雨方向变换的速度，取值范围： -1 到 1
-            // 当 speedx = maxspeedx时，下雨方向 会 随鼠标移动方向立即改变
-            speedx = speedx + (maxspeedx - speedx) / 50;
+            // 当 speedX = maxspeedx时，下雨方向 会 随鼠标移动方向立即改变
+            speedX = speedX + (maxSpeedX - speedX) / 50;
 
             // 根据lineNum的值，画一定数量雨滴
             for (let i = 0; i < lineNum; i++) {
@@ -176,15 +162,15 @@ class Canvas extends Component {
             }
 
             // 设置结束线，也就是雨滴散开 形成许多小水珠的位置
-            var endLine = canvasEl.clientHeight - Math.random() * canvasEl.clientHeight / 5;
+            let endLine = canvasEl.clientHeight - Math.random() * canvasEl.clientHeight / 5;
 
             // 遍历保存雨滴的数组
             lineList.forEach(function (e) {
 
                 // 利用勾股定理 确定一个范围，在这个范围内雨滴会散开形成小水珠
-                // e.posx + speedx * e.h 是雨滴x坐标
+                // e.posx + speedX * e.h 是雨滴x坐标
                 // e.posy + e.h 是雨滴y坐标
-                var dis = Math.sqrt(((e.posx + speedx * e.h) - mousePos[0]) * ((e.posx + speedx * e.h) - mousePos[0]) + (e.posy + e.h - mousePos[1]) * (e.posy + e.h - mousePos[1]));
+                let dis = Math.sqrt(((e.posx + speedX * e.h) - mousePos[0]) * ((e.posx + speedX * e.h) - mousePos[0]) + (e.posy + e.h - mousePos[1]) * (e.posy + e.h - mousePos[1]));
 
                 // 如果在mouseDis区域内，就删除雨滴，画一些小水珠（圆弧）
                 // 实现鼠标碰到雨滴，雨滴散成小水珠的效果
@@ -192,13 +178,13 @@ class Canvas extends Component {
                     // 删除 雨滴
                     e.die = true;
                     // 画一些小水珠（圆弧）
-                    madedrops(e.posx + speedx * e.h, e.posy + e.h);
+                    madedrops(e.posx + speedX * e.h, e.posy + e.h);
                 }
 
                 // 如果雨滴超过 结束线，删除雨滴，画一些小水珠（圆弧）
                 if ((e.posy + e.h) > endLine) {
                     e.die = true;
-                    madedrops(e.posx + speedx * e.h, e.posy + e.h);
+                    madedrops(e.posx + speedX * e.h, e.posy + e.h);
                 }
 
                 // 如果 雨滴 y坐标 大于 可视区域的高度，设置die属性为true
@@ -210,9 +196,9 @@ class Canvas extends Component {
                     e.posy = e.posy + e.speed;
 
                     // 变化雨滴 x坐标
-                    // * speedx 用来控制雨滴 下落 方向
+                    // * speedX 用来控制雨滴 下落 方向
                     // 使 雨滴下落方向 和 鼠标移动方向相同
-                    e.posx = e.posx + e.speed * speedx;
+                    e.posx = e.posx + e.speed * speedX;
                 }
             });
 
@@ -224,23 +210,21 @@ class Canvas extends Component {
                 }
             }
 
-            // 渲染
             render();
-            // 递归调用 update，实现动画效果
             window.requestAnimationFrame(update);
         }
 
-        function calculateRGBColor(color,baseColor) {
+        function calculateRGBColor(color, baseColor) {
             return color + flag * Math.round(baseColor / 100)
         }
-        let flag = 0.1;
+
         function render() {
-            if(Math.round(r) === -10 || Math.round(r) === 255){
+            if (Math.round(r) === -10 || Math.round(r) === 255) {
                 flag = -flag
             }
 
-            r = calculateRGBColor(r,baseR);
-            g = calculateRGBColor(g,baseG);
+            r = calculateRGBColor(r, baseR);
+            g = calculateRGBColor(g, baseG);
             b = calculateRGBColor(b, baseB);
             ctx.fillStyle = getRgb(r, g, b);
             ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
@@ -252,15 +236,15 @@ class Canvas extends Component {
                 ctx.beginPath();
                 ctx.moveTo(line.posx, line.posy);
 
-                // * speedx 用来控制雨滴方向
+                // * speedX 用来控制雨滴方向
                 // 使 雨滴方向 和 鼠标移动方向相同
-                ctx.lineTo(line.posx + line.h * speedx, line.posy + line.h);
+                ctx.lineTo(line.posx + line.h * speedX, line.posy + line.h);
                 ctx.stroke();
             });
 
             // 画雨滴散开形成小水珠效果
             ctx.lineWidth = 1;
-            ctx.strokeStyle = getRgb(255-r, 255-g, 255-b);
+            ctx.strokeStyle = getRgb(255 - r, 255 - g, 255 - b);
             dropList.forEach(function (e) {
                 ctx.beginPath();
                 ctx.arc(e.posx, e.posy, e.radius, Math.random() * Math.PI * 2, Math.PI);
