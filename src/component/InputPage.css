@@ -4,24 +4,32 @@ canvas {
     width: 100%;
 }
 
+h3{
+    font-family: 'Poppins', sans-serif !important;
+}
+
 .login-page {
+    position: absolute;
     height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 40px;
     padding-bottom: 40px;
+    font-weight: 400;
+    font-size: 24px;
 }
 
 .form-signin {
     width: 100%;
-    max-width: 40%;
+    max-width: 30%;
     padding: 15px;
     margin: 0 auto;
 }
 
 .form-signin .checkbox {
-    font-weight: 400;
+
 }
 
 .form-signin .form-control {

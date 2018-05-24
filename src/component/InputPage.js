@@ -8,8 +8,8 @@ import Canvas from './Canvas';
 const INPUT_ERROR_STYLE = "text-danger form-text";
 
 const displayMessage = {
-    LOGIN: 'Input nick name',
-    FRIEND: 'Input friend name'
+    LOGIN: 'Login Here',
+    FRIEND: "Friend's Name"
 };
 
 const labelMessage = {
@@ -164,7 +164,7 @@ class Login extends Component {
                         <div className="alert alert-warning alert-dismissible fade show" role="alert">
                             {this.state.alertMessage}
                         </div>}
-                        <h1 className="h3 mb-3 font-weight-normal">{displayMessage[this.props.currentStatus]}</h1>
+                        <h1 className="h3 mb-3 font-weight-bold">{displayMessage[this.props.currentStatus]}</h1>
 
                         <div className="form-group">
                             <input id="inputValue" className="form-control" type="text"

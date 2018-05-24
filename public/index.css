@@ -1,7 +1,8 @@
 html, body {
     margin: 0;
     height: 100%;
-    overflow: hidden
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 html {
@@ -10,15 +11,5 @@ html {
 
 #root {
     height: 100%;
-}
-
-html, input {
-    font-family: "HelveticaNeue-Light",
-    "Helvetica Neue Light",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    "Lucida Grande",
-    sans-serif,
-    "Songti SC";
+    position: relative;
 }

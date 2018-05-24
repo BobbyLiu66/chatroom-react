@@ -66,7 +66,7 @@ class Canvas extends Component {
             snowList.forEach(function (snow) {
                 let endLine = canvasEl.clientHeight - Math.random() * canvasEl.clientHeight / 5;
                 if (snow.posy + 5 < endLine) {
-                    snow.posx += 0.1 * Math.floor(Math.random() * (1 + 1 + 1) - 1);
+                    snow.posx += 0.1 * Math.floor(Math.random() * 3 - 1);
                     snow.posy += 2 * Math.random() + 3;
                 }
                 else if (snow.posy + 2 < endLine) {
