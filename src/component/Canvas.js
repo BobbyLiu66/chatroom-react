@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+let req = '';
 
 class Canvas extends Component {
     constructor() {
@@ -45,7 +46,7 @@ class Canvas extends Component {
         function update() {
             createSnow(Math.random() * canvasEl.width);
             render();
-            window.requestAnimationFrame(update);
+            req = window.requestAnimationFrame(update);
         }
 
         function calculateRGBColor(color, baseColor) {
@@ -59,8 +60,6 @@ class Canvas extends Component {
             r = calculateRGBColor(r, baseR);
             g = calculateRGBColor(g, baseG);
             b = calculateRGBColor(b, baseB);
-
-            // ctx.fillStyle = "rgb(79,195,247)";
             console.log(getRgb(r, g, b));
             ctx.fillStyle = getRgb(r, g, b);
             ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
@@ -93,6 +92,10 @@ class Canvas extends Component {
                 snowList.shift()
             }
         }
+    }
+
+    componentWillUnmount(){
+        window.cancelAnimationFrame(req);
     }
 
     render() {
