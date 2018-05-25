@@ -27,7 +27,7 @@ class Canvas extends Component {
         };
 
         function getRgb(r, g, b) {
-            return "rgb(" + r + "," + g + "," + b + ")";
+            return `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`;
         }
 
         function createSnow(e) {
@@ -59,6 +59,9 @@ class Canvas extends Component {
             r = calculateRGBColor(r, baseR);
             g = calculateRGBColor(g, baseG);
             b = calculateRGBColor(b, baseB);
+
+            // ctx.fillStyle = "rgb(79,195,247)";
+            console.log(getRgb(r, g, b));
             ctx.fillStyle = getRgb(r, g, b);
             ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
 
