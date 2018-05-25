@@ -14,11 +14,17 @@
 
 .weather-card{
     margin-top: 10px;
-    border-radius: 25px;
+    border-radius: 15px;
     border: solid 1px #e7e7e7;
     box-shadow: 0 0 10px rgba(0,0,0,0.6);
-
+    width: 250px;
 }
+
+.weather-bg{
+    width: 250px;
+    height: 250px;
+}
+
 .loading{
     /*width: 60px;*/
     /*height: 60px;*/
