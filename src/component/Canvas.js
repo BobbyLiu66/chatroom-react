@@ -53,10 +53,9 @@ class Canvas extends Component {
         }
 
         function render() {
-            if (Math.round(r) === -10 || Math.round(r) === 255) {
+            if (Math.round(r) === -10 || Math.round(r) === baseR) {
                 flag = -flag
             }
-
             r = calculateRGBColor(r, baseR);
             g = calculateRGBColor(g, baseG);
             b = calculateRGBColor(b, baseB);
