@@ -27,24 +27,24 @@ class WeatherService extends Component {
         }).then((response) => {
             let data = response.data;
             let img = "https://storage.googleapis.com/chatroom.geekliubo.com/weather/";
-            switch (true){
+            switch (true) {
                 case (data.weather[0].description.includes('sky')):
-                    img+="sky.jpeg";
+                    img += "sky.jpeg";
                     break;
                 case (data.weather[0].description.includes('rain')):
-                    img+="rain.jpeg";
+                    img += "rain.jpeg";
                     break;
                 case (data.weather[0].description.includes('clouds')):
-                    img+="clouds.jpeg";
+                    img += "clouds.jpeg";
                     break;
                 case (data.weather[0].description.includes('thunderstorm')):
-                    img+="thunder.jpeg";
+                    img += "thunder.jpeg";
                     break;
                 case (data.weather[0].description.includes('snow')):
-                    img+="snow.jpeg";
+                    img += "snow.jpeg";
                     break;
                 case (data.weather[0].description.includes('mist')):
-                    img+="mist.jpeg";
+                    img += "mist.jpeg";
                     break;
                 default:
                     break
@@ -81,37 +81,15 @@ class WeatherService extends Component {
 
                 <div className="row justify-content-md-center">
                     <div className="col-md-auto">
-
-                        {/*{this.state.displayWeather &&*/}
-                        {/*<div>*/}
-                            {/*<img*/}
-                                {/*src="https://storage.googleapis.com/chatroom.geekliubo.com/weather/pexels-photo-226460.jpeg"*/}
-                                {/*alt=""/>*/}
-
-                            {/*<ul className="list-group list-group-flush">*/}
-                                {/*<li className="list-group-item text-center"><h5>{this.state.name}</h5></li>*/}
-                                {/*<li className="list-group-item text-center"><p>{this.state.weather[0].description}</p>*/}
-                                {/*</li>*/}
-                                {/*<li className="list-group-item text-center">*/}
-                                    {/*<table className="text-center">*/}
-                                        {/*<tbody>*/}
-                                        {/*<tr>*/}
-                                            {/*<td>High:{this.state.main.temp - 273.15}°C</td>*/}
-                                            {/*<td>Low:{this.state.main.temp - 273.15}°C</td>*/}
-                                        {/*</tr>*/}
-                                        {/*</tbody>*/}
-                                    {/*</table>*/}
-                                {/*</li>*/}
-                            {/*</ul>*/}
-                        {/*</div>*/}
-                        {/*}*/}
                         {this.state.displayWeather &&
                         <div className="card weather-card text-center">
-                            <img className="card-img-top weather-bg" src={this.state.img} alt={this.state.weather[0].description} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{this.state.name}</h5>
-                                    <p className="card-text text-muted">{this.state.weather[0].description}</p>
-                                </div>
+                            <img className="card-img-top weather-bg" src={this.state.img}
+                                 alt={this.state.weather[0].description}/>
+                            <div className="card-body">
+                                <h5 className="card-title">{this.state.name}</h5>
+                                <p className="card-text text-muted">{this.state.weather[0].description}</p>
+                                <p className="card-text">{this.state.main.temp - 273.15}°C</p>
+                            </div>
                         </div>
                         }
                     </div>
