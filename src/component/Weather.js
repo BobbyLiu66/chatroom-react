@@ -88,7 +88,7 @@ class WeatherService extends Component {
                             <div className="card-body">
                                 <h5 className="card-title">{this.state.name}</h5>
                                 <p className="card-text text-muted">{this.state.weather[0].description}</p>
-                                <p className="card-text">{this.state.main.temp - 273.15}°C</p>
+                                <p className="card-text">{Math.round(this.state.main.temp - 273.15)}°C</p>
                             </div>
                         </div>
                         }
