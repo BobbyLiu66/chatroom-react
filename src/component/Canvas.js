@@ -60,7 +60,6 @@ class Canvas extends Component {
             r = calculateRGBColor(r, baseR);
             g = calculateRGBColor(g, baseG);
             b = calculateRGBColor(b, baseB);
-            console.log(getRgb(r, g, b));
             ctx.fillStyle = getRgb(r, g, b);
             ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
 
