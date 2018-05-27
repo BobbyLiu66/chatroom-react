@@ -113,6 +113,7 @@ class Login extends Component {
                 version    : 'v3.0'
             });
             window.FB.getLoginStatus(function(response) {
+                //TODO global
                 console.log(response)
             });
         }.bind(this);
@@ -172,6 +173,7 @@ class Login extends Component {
 
     checkLoginState() {
         window.FB.getLoginStatus(function(response) {
+            //TODO global
             console.log(response)
         }.bind(this));
     }
@@ -213,13 +215,13 @@ class Login extends Component {
                         }
 
                         <div className="form-group">
-                            <button className="btn btn-lg btn-primary btn-block" type="submit"
+                            <button className="btn btn-lg btn-primary btn-block submit-button" type="submit"
                                     onClick={this.handleSubmit}
                                     value="submit" disabled={this.state.disableButton}>Submit
                             </button>
                         </div>
 
-                        <div className="fb-login-button" data-max-rows="1" data-size="large"
+                        <div className="fb-login-button" data-width="220px" data-max-rows="1" data-size="large"
                              data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false"
                              data-use-continue-as="false"></div>
                     </form>

@@ -22,8 +22,7 @@ h3{
 }
 
 .form-signin {
-    width: 100%;
-    max-width: 30%;
+    width: 270px;
     padding: 15px;
     margin: 0 auto;
 }
@@ -66,4 +65,7 @@ h3{
 .extraClass:hover {
     visibility: visible !important;
     opacity: 1 !important;
+}
+.submit-button{
+    height: 40px;
 }
