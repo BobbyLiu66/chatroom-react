@@ -105,6 +105,27 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        window.fbAsyncInit = function() {
+            window.FB.init({
+                appId      : '373082293212192',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v3.0'
+            });
+            window.FB.getLoginStatus(function(response) {
+                console.log(response)
+            });
+        }.bind(this);
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=373082293212192&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
         socket.on('REQUEST_RESULT', (data) => {
             if (data.err) {
                 this.setState({
@@ -149,6 +170,12 @@ class Login extends Component {
         })
     }
 
+    checkLoginState() {
+        window.FB.getLoginStatus(function(response) {
+            console.log(response)
+        }.bind(this));
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -191,6 +218,10 @@ class Login extends Component {
                                     value="submit" disabled={this.state.disableButton}>Submit
                             </button>
                         </div>
+
+                        <div className="fb-login-button" data-max-rows="1" data-size="large"
+                             data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false"
+                             data-use-continue-as="false"></div>
                     </form>
                 </div>
 
