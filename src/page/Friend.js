@@ -1,6 +1,5 @@
 //TODO display add friend list and optional display friend list like weixin
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import './Chat.css'
 import socket from '../tools/getSocket';
 
@@ -32,7 +31,6 @@ class Friend extends Component {
                 addFriend: data
             })
         })
-
     }
 
     displayFriend(data) {

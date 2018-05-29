@@ -196,7 +196,6 @@ class Login extends Component {
                         <Facebook/>
                     </form>
                 </div>
-
             </React.Fragment>
         )
     }
