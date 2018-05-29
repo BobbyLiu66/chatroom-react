@@ -22,20 +22,6 @@ class App extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleInputClick = this.handleInputClick.bind(this);
     }
-    componentDidMount() {
-        // {
-        //     status: 'connected',
-        //         authResponse: {
-        //     accessToken: '...',
-        //         expiresIn:'...',
-        //         signedRequest:'...',
-        //         userID:'...'
-        // }
-        // }
-        FB.getLoginStatus(function(response) {
-            this.setState({facebook:response});
-        });
-    }
 
     componentWillMount() {
         window.sessionStorage.username && this.handleInputClick()
