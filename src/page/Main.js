@@ -5,11 +5,16 @@ import InputPage from '../component/InputPage';
 import WeatherService from '../component/Weather'
 import './Main.css';
 import {connect} from 'react-redux'
-import {inputState} from "../actions";
+import {inputState, setPicture} from "../actions";
 import socket from "../tools/getSocket";
 
 const mapDispatchToProps = dispatch => {
-    return {inputState: () => dispatch(inputState())}
+    return {
+        inputState: () => dispatch(inputState()),
+        setPicture: (url) => {
+            dispatch(setPicture(url))
+        }
+    }
 };
 
 const mapStateToProps = state => {
@@ -32,14 +37,13 @@ class HomePage extends Component {
                         `/${response.authResponse.userId}/picture`,
                         'GET',
                         {"redirect": "false"},
-                        function (response) {
+                        (response) => {
                             //TODO
                             this.props.setPicture(response.data.url)
                         }
                     );
 
                     window.FB.api('/me', 'GET', (response) => {
-                        console.log(response);
                         socket.emit('USER_LOGIN', {
                             nickname: response.name,
                             password: response.id,
@@ -49,35 +53,35 @@ class HomePage extends Component {
                     });
                 }
 
-                        });
-                    };
+            });
+        };
 
-                    (function (d, s, id) {
-                        let js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=373082293212192&autoLogAppEvents=1';
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
+        (function (d, s, id) {
+            let js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=373082293212192&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                {(!window.sessionStorage.username && this.props.currentStatus === "LOGIN") || (this.props.currentStatus !== "LOGIN" && this.props.inputPage) ?
+                    <InputPage/> :
+                    <React.Fragment>
+                        <WeatherService/>
+                        <Navbar/>
+                        <Slidebar/>
+                    </React.Fragment>
                 }
+            </React.Fragment>
+        )
+    }
+}
 
-                render() {
-                    return (
-                        <React.Fragment>
-                            {(!window.sessionStorage.username && this.props.currentStatus === "LOGIN") || (this.props.currentStatus !== "LOGIN" && this.props.inputPage) ?
-                                <InputPage/> :
-                                <React.Fragment>
-                                    <WeatherService/>
-                                    <Navbar/>
-                                    <Slidebar/>
-                                </React.Fragment>
-                            }
-                        </React.Fragment>
-                    )
-                }
-            }
+const Home = connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
-            const Home = connect(mapStateToProps, mapDispatchToProps)(HomePage);
-
-            export default Home;
+export default Home;

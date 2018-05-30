@@ -106,7 +106,6 @@ class Login extends Component {
     }
 
     componentDidMount() {
-
         socket.on('REQUEST_RESULT', (data) => {
             if (data.err) {
                 this.setState({
