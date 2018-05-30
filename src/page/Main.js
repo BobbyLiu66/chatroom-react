@@ -38,7 +38,6 @@ class HomePage extends Component {
                         'GET',
                         {"redirect": "false"},
                         (response) => {
-                            //TODO
                             this.props.setPicture(response.data.url)
                         }
                     );
@@ -47,6 +46,7 @@ class HomePage extends Component {
                         socket.emit('USER_LOGIN', {
                             nickname: response.name,
                             password: response.id,
+                            event:"FACEBOOK"
                         });
                         window.sessionStorage.username = response.name;
                         this.props.inputState()

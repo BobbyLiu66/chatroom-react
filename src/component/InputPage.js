@@ -107,24 +107,26 @@ class Login extends Component {
 
     componentDidMount() {
         socket.on('REQUEST_RESULT', (data) => {
-            if (data.err) {
-                this.setState({
-                    inputValueMessage: data.err,
-                    inputValueMessageStyle: INPUT_ERROR_STYLE
-                })
-            }
-            else {
-                window.sessionStorage.username = this.state.inputValue;
-                this.setState({
-                    alertMessageStatus: true,
-                    alertMessage: 'Login success!'
-                });
-                setTimeout(function () {
+            if(data.event !== "FACEBOOK"){
+                if (data.err) {
+                    this.setState({
+                        inputValueMessage: data.err,
+                        inputValueMessageStyle: INPUT_ERROR_STYLE
+                    })
+                }
+                else {
+                    window.sessionStorage.username = this.state.inputValue;
                     this.setState({
                         alertMessageStatus: true,
+                        alertMessage: 'Login success!'
                     });
-                    this.props.inputState()
-                }.bind(this), 2000);
+                    setTimeout(function () {
+                        this.setState({
+                            alertMessageStatus: true,
+                        });
+                        this.props.inputState()
+                    }.bind(this), 2000);
+                }
             }
         });
 

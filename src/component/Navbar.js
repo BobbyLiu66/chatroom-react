@@ -2,29 +2,26 @@ import React, {Component} from 'react';
 // import BoardController from './BoardController'
 // import ChatController from './ChatController'
 import './Navbar.css'
+import {connect} from "react-redux";
 
-class Navbar extends Component {
+const mapStateToProps = state => {
+    return { picture: state.picture };
+};
 
-    handleClick(){
-        window.FB.logout(function(response) {
-            console.log(response);
-            window.sessionStorage.username = '';
-            this.props.inputState()
-        });
-    }
-
+class Nav extends Component {
     render() {
         return (
             <nav className="navbar navbar-dark sticky-top bg-dark">
                 <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">{window.sessionStorage.username}</a>
-                    <ul className="navbar-nav px-3">
-                        <li className="nav-item text-nowrap">
-                            <a className="nav-link" href="" onClick={this.handleClick}>Sign out</a>
-                        </li>
-                    </ul>
+                <ul className="navbar-nav px-3">
+                    <img src={this.props.picture} alt=""/>
+                </ul>
             </nav>
         );
     }
 }
+
+
+const Navbar = connect(mapStateToProps)(Nav);
 
 export default Navbar;
