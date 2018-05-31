@@ -76,7 +76,6 @@ class App extends Component {
         });
     }
 
-    //TODO change logic to react router
     render() {
         return (
             <React.Fragment>

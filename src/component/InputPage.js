@@ -19,7 +19,7 @@ const labelMessage = {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {inputState: () => dispatch(inputState())}
+    return {inputState: (state) => dispatch(inputState(state))}
 };
 
 const mapStateToProps = state => {
@@ -69,7 +69,7 @@ class Login extends Component {
     }
 
     handleClick() {
-        this.props.inputState()
+        this.props.inputState(false)
     }
 
     handleChange(event) {
@@ -124,7 +124,7 @@ class Login extends Component {
                         this.setState({
                             alertMessageStatus: true,
                         });
-                        this.props.inputState()
+                        this.props.inputState(false)
                     }.bind(this), 2000);
                 }
             }
@@ -146,7 +146,7 @@ class Login extends Component {
                     this.setState({
                         alertMessageStatus: true,
                     });
-                    this.props.handleClick(data)
+                    this.props.handleClick(false)
                 }.bind(this), 2000);
             }
         })
