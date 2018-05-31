@@ -11,7 +11,8 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case INPUTSTATE:
             return Object.assign({
-                inputPage: !state.inputPage
+                inputPage: action.payload,
+                currentStatus:'LOGIN'
             });
         case ADDFRIEND:
             return Object.assign({
