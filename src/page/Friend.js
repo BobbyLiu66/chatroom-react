@@ -27,6 +27,7 @@ class Friend extends Component {
 
     componentDidMount() {
         socket.on('LOAD_FRIEND_REQUEST', (data) => {
+            console.log(data);
             this.setState({
                 addFriend: data
             })
@@ -39,10 +40,6 @@ class Friend extends Component {
             let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
             return (
                 <div className="row display-area">
-                    <div className="col-md-12">
-                        <button type="button" className="btn btn-outline-secondary">Add</button>
-                    </div>
-
                     <div className="col-md-3 time">
                         <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png" alt=""
                              className="image-size"/>
@@ -68,7 +65,10 @@ class Friend extends Component {
             <div className="col-md-11">
                 <div className="row input-area">
                     <div className="col-md-3 left-area">
-                        {this.displayFriend(this.state.friendList)}
+                        <div className="col-md-12">
+                            <button type="button" className="btn btn-outline-secondary">Add</button>
+                        </div>
+                        {this.displayFriend(this.state.addFriend)}
                     </div>
                 </div>
             </div>
