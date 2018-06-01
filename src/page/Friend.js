@@ -60,8 +60,7 @@ class FriendList extends Component {
                             <div className="col-md-12"><p className="text-center time">{displayTime}</p></div>
                             <div className="col-md-12"><p
                                 className="text-truncate">{`${result.nickname} want to be friend with you`}</p>
-                                <button type="button" className="btn btn-primary" value="AGREE" onClick={this.handleClick}
-                                        disabled={this.state.buttonStatus}>Agree
+                                <button type="button" className="btn btn-primary" value="AGREE" onClick={this.handleClick}>Agree
                                 </button>
                             </div>
                         </div>

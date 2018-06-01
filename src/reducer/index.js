@@ -1,11 +1,12 @@
-import {INPUTSTATE, ADDFRIEND, SETPICTURE,SLIDEBAR} from "../constants/auction_type";
+import {INPUTSTATE, ADDFRIEND, SETPICTURE, SLIDEBAR, LOADING} from "../constants/auction_type";
 
 
 const initialState = {
     inputPage: true,
     currentStatus: 'LOGIN',
     picture: '',
-    mainAreaDisplayed:''
+    mainAreaDisplayed: '',
+    loading: true
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,7 +14,7 @@ const rootReducer = (state = initialState, action) => {
         case INPUTSTATE:
             return Object.assign({
                 inputPage: action.payload,
-                currentStatus:'LOGIN'
+                currentStatus: 'LOGIN'
             });
         case ADDFRIEND:
             return Object.assign({
@@ -27,6 +28,10 @@ const rootReducer = (state = initialState, action) => {
         case SLIDEBAR:
             return Object.assign({
                 mainAreaDisplayed: action.payload
+            });
+        case LOADING:
+            return Object.assign({
+                loading: action.payload
             });
         default:
             return state

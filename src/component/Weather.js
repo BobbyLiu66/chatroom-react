@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-
 import './Weather.css'
 import './Loading.css'
+import Loading from './Loading'
+import {weatherUrl, imgUrl, weatherCode, weatherImg} from "../tools/weatherType";
 
 class WeatherService extends Component {
     constructor(props) {
@@ -16,35 +17,36 @@ class WeatherService extends Component {
 
     componentDidMount() {
         this.getWeather();
-        setInterval(() => {
-        }, 60 * 60 * 1000);
     }
 
     getWeather() {
         axios({
             method: 'Get',
-            url: `http://13.211.150.239:3002/weather?type=current`,
+            url: weatherUrl,
         }).then((response) => {
             let data = response.data;
-            let img = "https://storage.googleapis.com/chatroom.geekliubo.com/weather/";
+            let img = imgUrl;
             switch (true) {
-                case (data.weather[0].description.includes('sky')):
-                    img += "sky.jpeg";
+                case (data.weather[0].id === weatherCode.sunny):
+                    img += weatherImg.sunny;
                     break;
-                case (data.weather[0].description.includes('rain')):
-                    img += "rain.jpeg";
+                case (Math.floor(data.weather[0].id / 100) === weatherCode.rain):
+                    img += weatherImg.rain;
                     break;
-                case (data.weather[0].description.includes('clouds')):
-                    img += "clouds.jpeg";
+                case (Math.floor(data.weather[0].id / 100) === weatherCode.clouds):
+                    img += weatherImg.clouds;
                     break;
-                case (data.weather[0].description.includes('thunderstorm')):
-                    img += "thunder.jpeg";
+                case (Math.floor(data.weather[0].id / 100) === weatherCode.thunder):
+                    img += weatherImg.thunder;
                     break;
-                case (data.weather[0].description.includes('snow')):
-                    img += "snow.jpeg";
+                case (Math.floor(data.weather[0].id / 100) === weatherCode.snow):
+                    img += weatherImg.snow;
                     break;
-                case (data.weather[0].description.includes('mist')):
-                    img += "mist.jpeg";
+                case (Math.floor(data.weather[0].id / 100) === weatherCode.mist):
+                    img += weatherImg.mist;
+                    break;
+                case (Math.floor(data.weather[0].id / 100) === weatherCode.drizzle):
+                    img += weatherImg.drizzle;
                     break;
                 default:
                     break
@@ -71,11 +73,7 @@ class WeatherService extends Component {
                                                    src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`}
                                                    onClick={this.handleClick}
                                                    alt={this.state.weather[0].description}/> :
-                            <div className="lds-css ng-scope loading">
-                                <div className="lds-eclipse">
-                                    <div></div>
-                                </div>
-                            </div>}
+                            <Loading/>}
                     </div>
                 </div>
 
