@@ -10,13 +10,16 @@ import Friend from '../page/Friend'
 import Setting from '../page/Setting'
 import Loading from '../component/Loading'
 import socket from "../tools/getSocket";
-import {inputState, setPicture} from "../actions";
+import {inputState, setPicture, setLoading} from "../actions";
 
 const mapDispatchToProps = dispatch => {
     return {
         inputState: (state) => dispatch(inputState(state)),
         setPicture: (url) => {
             dispatch(setPicture(url))
+        },
+        setLoading: (state) => {
+            dispatch(setLoading(state))
         }
     }
 };
@@ -25,7 +28,12 @@ const mapStateToProps = state => {
     return {inputPage: state.inputPage, mainAreaDisplayed: state.mainAreaDisplayed, loading: state.loading};
 };
 
+
 class HomePage extends Component {
+    constructor() {
+        super()
+    }
+
     componentDidMount() {
         window.fbAsyncInit = () => {
             window.FB.init({
@@ -52,12 +60,14 @@ class HomePage extends Component {
                             event: "FACEBOOK"
                         });
                         window.sessionStorage.username = response.name;
-                        this.props.inputState(false)
+                        this.props.inputState(false);
+                        this.props.setLoading(false)
                     });
                 }
                 else {
                     window.sessionStorage.username = undefined;
-                    this.props.inputState(true)
+                    this.props.inputState(true);
+                    this.props.setLoading(true)
                 }
             });
         };
@@ -74,7 +84,7 @@ class HomePage extends Component {
     render() {
         return (
             <React.Fragment>
-                {this.props.inputPage ? <InputPage/> :
+                {this.props.loading ? <Loading/> : this.props.inputPage ? <InputPage/> :
                     <React.Fragment>
                         <WeatherService/>
                         <Navbar/>
