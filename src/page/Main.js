@@ -24,10 +24,14 @@ class HomePage extends Component {
                     <React.Fragment>
                         <WeatherService/>
                         <Navbar/>
-                        <Slidebar/>
-                        {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}
-                        {this.props.mainAreaDisplayed === 'FRIEND' && <Friend/>}
-                        {this.props.mainAreaDisplayed === 'SETTING' && <Setting/>}
+                        <div className="container-fluid fill">
+                            <div className="row fill">
+                                <Slidebar/>
+                                {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}
+                                {this.props.mainAreaDisplayed === 'FRIEND' && <Friend/>}
+                                {this.props.mainAreaDisplayed === 'SETTING' && <Setting/>}
+                            </div>
+                        </div>
                     </React.Fragment>
                 }
             </React.Fragment>
