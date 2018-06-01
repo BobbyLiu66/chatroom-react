@@ -17,7 +17,7 @@ const rootReducer = (state = initialState, action) => {
             });
         case ADDFRIEND:
             return Object.assign({
-                inputPage: !state.inputPage,
+                inputPage: action.payload,
                 currentStatus: 'FRIEND'
             });
         case SETPICTURE:

@@ -2,34 +2,45 @@
 import React, {Component} from 'react';
 import './Chat.css'
 import socket from '../tools/getSocket';
+import {addFriend} from "../actions";
+import {connect} from 'react-redux'
 
-class Friend extends Component {
+const mapDispatchToProps = dispatch => {
+    return {addFriend: (input) => dispatch(addFriend(input))}
+};
+
+class FriendList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addFriend: [],
+            addFriendList: [],
         };
         this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick(data) {
-        socket.emit('ADD_FRIEND_SUCCESS', data);
-        this.setState((prevState) => {
-            prevState.addFriend.map((friend) => {
-                //TODO
-                if (friend.id === data.id) {
-                    friend.buttonState = false
-                }
-                return friend
+    handleClick(event) {
+        if(event.target.value === "AGREE"){
+            socket.emit('ADD_FRIEND_SUCCESS', event);
+            this.setState((prevState) => {
+                prevState.addFriendList.map((friend) => {
+                    //TODO
+                    // if (friend.id === data.id) {
+                    //     friend.buttonState = false
+                    // }
+                    return friend
+                })
             })
-        })
+        }
+
+        else if(event.target.value === "ADD"){
+            this.props.addFriend(true)
+        }
     }
 
     componentDidMount() {
         socket.on('LOAD_FRIEND_REQUEST', (data) => {
-            console.log(data);
             this.setState({
-                addFriend: data
+                addFriendList: data
             })
         })
     }
@@ -49,7 +60,7 @@ class Friend extends Component {
                             <div className="col-md-12"><p className="text-center time">{displayTime}</p></div>
                             <div className="col-md-12"><p
                                 className="text-truncate">{`${result.nickname} want to be friend with you`}</p>
-                                <button type="button" className="btn btn-primary" onClick={this.handleClick}
+                                <button type="button" className="btn btn-primary" value="AGREE" onClick={this.handleClick}
                                         disabled={this.state.buttonStatus}>Agree
                                 </button>
                             </div>
@@ -66,14 +77,20 @@ class Friend extends Component {
                 <div className="row input-area">
                     <div className="col-md-3 left-area">
                         <div className="col-md-12">
-                            <button type="button" className="btn btn-outline-secondary">Add</button>
+                            <div className="input-group mb-3 image">
+                                <input type="text" className="form-control"/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-outline-secondary" value="ADD" type="button" onClick={this.handleClick}>Add</button>
+                                </div>
+                            </div>
                         </div>
-                        {this.displayFriend(this.state.addFriend)}
+                        {this.displayFriend(this.state.addFriendList)}
                     </div>
                 </div>
             </div>
         );
     }
 }
+const Friend = connect(null,mapDispatchToProps)(FriendList);
 
 export default Friend

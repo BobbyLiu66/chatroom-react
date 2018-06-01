@@ -9,11 +9,9 @@ import Chat from "./Chat";
 import Friend from '../page/Friend'
 import Setting from '../page/Setting'
 
-
 const mapStateToProps = state => {
     return {inputPage: state.inputPage, mainAreaDisplayed: state.mainAreaDisplayed};
 };
-
 
 class HomePage extends Component {
     render() {
