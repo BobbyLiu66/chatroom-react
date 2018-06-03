@@ -30,9 +30,6 @@ const mapStateToProps = state => {
 
 
 class HomePage extends Component {
-    constructor() {
-        super()
-    }
 
     componentDidMount() {
         window.fbAsyncInit = () => {

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Navbar.css'
 import {connect} from "react-redux";
-import Facebook from "./Facebook";
 import {inputState} from "../actions";
 
 const mapDispatchToProps = dispatch => {

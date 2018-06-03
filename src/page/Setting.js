@@ -1,6 +1,5 @@
 //TODO change nick name. avatar.
 import React, {Component} from 'react';
-import socket from '../tools/getSocket';
 
 class Setting extends Component {
     constructor(props){
