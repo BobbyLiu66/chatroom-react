@@ -60,14 +60,13 @@ class HomePage extends Component {
                             event: "FACEBOOK"
                         });
                         window.sessionStorage.username = response.name;
+                        this.props.setLoading(false);
                         this.props.inputState(false);
-                        this.props.setLoading(false)
                     });
                 }
                 else {
-                    window.sessionStorage.username = undefined;
+                    this.props.setLoading(false);
                     this.props.inputState(true);
-                    this.props.setLoading(true)
                 }
             });
         };

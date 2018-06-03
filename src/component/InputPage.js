@@ -157,7 +157,7 @@ class Login extends Component {
             <React.Fragment>
                 <Canvas/>
                 <div className="text-center login-page">
-                    {window.sessionStorage.username &&
+                    {window.sessionStorage.username !== "undefined" &&
                     <button type="button" className="close close-button" aria-label="Close" onClick={this.handleClick}>
                         <span aria-hidden="true">&times;</span>
                     </button>

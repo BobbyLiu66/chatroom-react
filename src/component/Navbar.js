@@ -13,12 +13,19 @@ const mapDispatchToProps = dispatch => {
 class Nav extends Component {
     constructor(){
         super();
+        this.state = {name:''};
         this.handleClick = this.handleClick.bind(this)
     }
     handleClick(){
-        window.sessionStorage.username = undefined;
-        this.props.inputState(true);
-        //TODO facebook logout
+        window.FB.logout(() => {
+            window.sessionStorage.username = undefined;
+            this.props.inputState(true);
+        });
+    }
+    componentDidMount(){
+        this.setState({
+            name:window.sessionStorage.username
+        })
     }
     render() {
         return (
