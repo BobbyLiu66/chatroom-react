@@ -123,9 +123,12 @@ class Chat extends Component {
             this.state.roomName === data.roomName && this.setState({chatMessage: [...this.state.chatMessage, data]})
         });
 
+
         socket.on('reconnect', () => {
+            console.log("reconnect");
             socket.emit('RECONNECT', {nickname: window.sessionStorage.username})
         });
+
     }
 
     componentDidUpdate() {

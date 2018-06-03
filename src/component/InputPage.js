@@ -194,7 +194,7 @@ class Login extends Component {
                                     value="submit" disabled={this.state.disableButton}>Submit
                             </button>
                         </div>
-                        <Facebook/>
+                        {this.props.currentStatus === "LOGIN" && <Facebook/>}
                     </form>
                 </div>
             </React.Fragment>
