@@ -19,51 +19,42 @@ class FriendList extends Component {
     }
 
     handleClick(event) {
-        if(event.target.value === "AGREE"){
+        if (event.target.value === "AGREE") {
             socket.emit('ADD_FRIEND_SUCCESS', event);
-            this.setState((prevState) => {
-                prevState.addFriendList.map((friend) => {
-                    //TODO
-                    // if (friend.id === data.id) {
-                    //     friend.buttonState = false
-                    // }
-                    return friend
-                })
-            })
         }
 
-        else if(event.target.value === "ADD"){
+        else if (event.target.value === "ADD") {
             this.props.addFriend(true)
         }
     }
 
     componentDidMount() {
-        socket.on('LOAD_FRIEND_REQUEST', (data) => {
+        socket.emit("NEW_FRIEND_LIST", {
+            nickname: window.sessionStorage.username
+        });
+        socket.on('LOAD_FRIEND_LIST', (data) => {
+            console.log("LOAD");
+            console.log(data);
             this.setState({
-                addFriendList: data
+                addFriendList: data.newFriendList
             })
         })
     }
 
     displayFriend(data) {
         return data.map((result) => {
-            let messageTime = new Date(result.messageTime);
-            let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
             return (
-                <div className="row display-area">
-                    <div className="col-md-3 time">
+                <div className="row display-area text-center">
+                    <div className="col-md-2">
                         <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png" alt=""
                              className="image-size"/>
                     </div>
-                    <div className="col-md-9">
-                        <div className="row">
-                            <div className="col-md-12"><p className="text-center time">{displayTime}</p></div>
-                            <div className="col-md-12"><p
-                                className="text-truncate">{`${result.nickname} want to be friend with you`}</p>
-                                <button type="button" className="btn btn-primary" value="AGREE" onClick={this.handleClick}>Agree
-                                </button>
-                            </div>
-                        </div>
+                    <div className="col-md-10">
+                            <p className="text-truncate ">{`${result.nickname} want to be friend with you`}
+                            </p>
+                        <button type="button" className="btn btn-outline-success btn-sm" value="AGREE"
+                                onClick={this.handleClick}>AGREE
+                        </button>
                     </div>
                 </div>
             )
@@ -79,7 +70,9 @@ class FriendList extends Component {
                             <div className="input-group mb-3 image">
                                 <input type="text" className="form-control"/>
                                 <div className="input-group-append">
-                                    <button className="btn btn-outline-secondary" value="ADD" type="button" onClick={this.handleClick}>Add</button>
+                                    <button className="btn btn-outline-secondary" value="ADD" type="button"
+                                            onClick={this.handleClick}>Add
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -90,6 +83,7 @@ class FriendList extends Component {
         );
     }
 }
-const Friend = connect(null,mapDispatchToProps)(FriendList);
+
+const Friend = connect(null, mapDispatchToProps)(FriendList);
 
 export default Friend

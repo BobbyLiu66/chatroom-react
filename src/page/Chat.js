@@ -73,11 +73,11 @@ class Chat extends Component {
 
     componentDidMount() {
         //TODO
-        // socket.on('ADD_FRIEND_REQUEST', (data) => {
-        //
-        //     let result = window.confirm(`${data.nickname} want to be friend with you`);
-        //     result && socket.emit('ADD_FRIEND_SUCCESS', data)
-        // });
+        socket.on('ADD_FRIEND_REQUEST', (data) => {
+
+            let result = window.confirm(`${data.nickname} want to be friend with you`);
+            result && socket.emit('ADD_FRIEND_SUCCESS', data)
+        });
 
         socket.on('LOAD_HISTORY', (data, prevData) => {
             this.setState((prevState) => {
