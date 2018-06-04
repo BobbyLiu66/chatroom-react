@@ -14,6 +14,7 @@ class FriendList extends Component {
         super(props);
         this.state = {
             addFriendList: [],
+            search:''
         };
         this.handleClick = this.handleClick.bind(this)
     }
@@ -33,8 +34,6 @@ class FriendList extends Component {
             nickname: window.sessionStorage.username
         });
         socket.on('LOAD_FRIEND_LIST', (data) => {
-            console.log("LOAD");
-            console.log(data);
             this.setState({
                 addFriendList: data.newFriendList
             })
@@ -61,6 +60,12 @@ class FriendList extends Component {
         })
     }
 
+    handleChange(event) {
+        event.preventDefault();
+        //TODO
+        this.setState({search: event.target.value});
+    }
+
     render() {
         return (
             <div className="col-md-11">
@@ -68,7 +73,7 @@ class FriendList extends Component {
                     <div className="col-md-3 left-area">
                         <div className="col-md-12">
                             <div className="input-group mb-3 image">
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control" onChange={this.handleChange}/>
                                 <div className="input-group-append">
                                     <button className="btn btn-outline-secondary" value="ADD" type="button"
                                             onClick={this.handleClick}>Add
