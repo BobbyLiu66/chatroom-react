@@ -21,12 +21,11 @@ class FriendList extends Component {
     }
 
     handleClick(event) {
-        if (event.target.value === "AGREE") {
-            socket.emit('ADD_FRIEND_SUCCESS', event);
-        }
-
-        else if (event.target.value === "ADD") {
+        if (event.target.value === "ADD") {
             this.props.addFriend(true)
+        }
+        else {
+            socket.emit('ADD_FRIEND_SUCCESS', {nickname:event.target.value,inviteName:window.sessionStorage.username});
         }
     }
 
@@ -43,6 +42,7 @@ class FriendList extends Component {
 
     displayFriend(data) {
         return data.map((result) => {
+            console.log(result.state === "PASS");
             return (
                 <div className="row display-area text-center">
                     <div className="col-md-2">
@@ -52,8 +52,8 @@ class FriendList extends Component {
                     <div className="col-md-10">
                             <p className="text-truncate ">{`${result.nickname} want to be friend with you`}
                             </p>
-                        <button type="button" className="btn btn-outline-success btn-sm" value="AGREE"
-                                onClick={this.handleClick}>AGREE
+                        <button type="button" className="btn btn-outline-success btn-sm" value={result.nickname}
+                                disabled={result.state === "PASS"} onClick={this.handleClick}>{result.state === "PASS" ? "ADDED":"AGREE"}
                         </button>
                     </div>
                 </div>
