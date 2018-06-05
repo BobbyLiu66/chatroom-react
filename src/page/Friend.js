@@ -16,7 +16,8 @@ class FriendList extends Component {
             addFriendList: [],
             search:''
         };
-        this.handleClick = this.handleClick.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this)
     }
 
     handleClick(event) {
@@ -62,7 +63,6 @@ class FriendList extends Component {
 
     handleChange(event) {
         event.preventDefault();
-        //TODO
         this.setState({search: event.target.value});
     }
 

@@ -146,7 +146,7 @@ class Login extends Component {
                     this.setState({
                         alertMessageStatus: true,
                     });
-                    this.props.handleClick(false)
+                    this.props.inputState(false)
                 }.bind(this), 2000);
             }
         })
