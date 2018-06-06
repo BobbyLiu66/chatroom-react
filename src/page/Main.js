@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from '../component/Navbar';
 import Slidebar from '../component/Slidebar'
-import InputPage from '../component/InputPage';
+import LoginPage from '../component/LoginPage';
 import WeatherService from '../component/Weather'
 import './Main.css';
 import {connect} from 'react-redux'
@@ -80,7 +80,7 @@ class HomePage extends Component {
     render() {
         return (
             <React.Fragment>
-                {this.props.loading ? <Loading/> : this.props.inputPage ? <InputPage/> :
+                {this.props.loading ? <Loading/> : this.props.inputPage ? <LoginPage/> :
                     <React.Fragment>
                         <WeatherService/>
                         <Navbar/>

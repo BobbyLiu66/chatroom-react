@@ -14,7 +14,7 @@ class FriendList extends Component {
         super(props);
         this.state = {
             addFriendList: [],
-            search:''
+            search: ''
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this)
@@ -25,7 +25,10 @@ class FriendList extends Component {
             this.props.addFriend(true)
         }
         else {
-            socket.emit('ADD_FRIEND_SUCCESS', {nickname:event.target.value,inviteName:window.sessionStorage.username});
+            socket.emit('ADD_FRIEND_SUCCESS', {
+                nickname: event.target.value,
+                inviteName: window.sessionStorage.username
+            });
         }
     }
 
@@ -42,7 +45,6 @@ class FriendList extends Component {
 
     displayFriend(data) {
         return data.map((result) => {
-            console.log(result.state === "PASS");
             return (
                 <div className="row display-area text-center">
                     <div className="col-md-2">
@@ -50,10 +52,11 @@ class FriendList extends Component {
                              className="image-size"/>
                     </div>
                     <div className="col-md-10">
-                            <p className="text-truncate ">{`${result.nickname} want to be friend with you`}
-                            </p>
+                        <p className="text-truncate ">{`${result.nickname} want to be friend with you`}
+                        </p>
                         <button type="button" className="btn btn-outline-success btn-sm" value={result.nickname}
-                                disabled={result.state === "PASS"} onClick={this.handleClick}>{result.state === "PASS" ? "ADDED":"AGREE"}
+                                disabled={result.state === "PASS"}
+                                onClick={this.handleClick}>{result.state === "PASS" ? "ADDED" : "AGREE"}
                         </button>
                     </div>
                 </div>
@@ -72,13 +75,11 @@ class FriendList extends Component {
                 <div className="row input-area">
                     <div className="col-md-3 left-area">
                         <div className="col-md-12">
-                            <div className="input-group mb-3 image">
-                                <input type="text" className="form-control" onChange={this.handleChange}/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-outline-secondary" value="ADD" type="button"
-                                            onClick={this.handleClick}>Add
-                                    </button>
-                                </div>
+                            <div className="input-group mb-3 image text-center">
+                                {/*<input type="text" className="form-control" onChange={this.handleChange}/>*/}
+                                <button className="btn btn-outline-secondary btn-lg" value="ADD" type="button"
+                                        onClick={this.handleClick}>Add Friend Here
+                                </button>
                             </div>
                         </div>
                         {this.displayFriend(this.state.addFriendList)}

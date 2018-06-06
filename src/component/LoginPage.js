@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import './InputPage.css'
+import './LoginPage.css'
 import socket from '../tools/getSocket'
 import {inputState} from "../actions";
 import Canvas from './Canvas';
@@ -111,14 +111,16 @@ class Login extends Component {
                 if (data.err) {
                     this.setState({
                         inputValueMessage: data.err,
-                        inputValueMessageStyle: INPUT_ERROR_STYLE
+                        inputValueMessageStyle: INPUT_ERROR_STYLE,
+                        disableButton: false
                     })
                 }
                 else {
                     window.sessionStorage.username = this.state.inputValue;
                     this.setState({
                         alertMessageStatus: true,
-                        alertMessage: 'Login success!'
+                        alertMessage: 'Login success!',
+                        disableButton: false
                     });
                     setTimeout(function () {
                         this.setState({
@@ -134,13 +136,15 @@ class Login extends Component {
             if (data.err) {
                 this.setState({
                     inputValueMessage: data.err,
-                    inputValueMessageStyle: INPUT_ERROR_STYLE
+                    inputValueMessageStyle: INPUT_ERROR_STYLE,
+                    disableButton: false
                 })
             }
             else {
                 this.setState({
                     alertMessageStatus: true,
-                    alertMessage: 'Invite friend success!'
+                    alertMessage: 'Invite friend success!',
+                    disableButton: false
                 });
                 setTimeout(function () {
                     this.setState({
@@ -202,6 +206,6 @@ class Login extends Component {
     }
 }
 
-const InputPage = connect(mapStateToProps, mapDispatchToProps)(Login);
+const LoginPage = connect(mapStateToProps, mapDispatchToProps)(Login);
 
-export default InputPage;
+export default LoginPage;
