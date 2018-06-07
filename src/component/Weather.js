@@ -70,7 +70,7 @@ class WeatherService extends Component {
                 <div className="row justify-content-md-center">
                     <div className="col-md-auto">
                         {this.state.weather ? <img className="weather-image"
-                                                   src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`}
+                                                   src={`https://openweathermap.org/img/w/${this.state.weather[0].icon}.png`}
                                                    onClick={this.handleClick}
                                                    alt={this.state.weather[0].description}/> :
                             <Loading/>}
