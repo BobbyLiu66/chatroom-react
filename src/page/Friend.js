@@ -53,7 +53,7 @@ class FriendList extends Component {
                         <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png" alt=""
                              className="image-size"/>
                     </div>
-                    <div className="col-md-10">
+                    <div className="col-md-9 offset-1">
                         <p className="text-truncate ">{`${result.nickname} want to be friend with you`}
                         </p>
                         <button type="button" className="btn btn-outline-success btn-sm" value={result.nickname}
@@ -78,7 +78,7 @@ class FriendList extends Component {
                     <div className="col-md-3 left-area">
                         <div className="col-md-12">
                             <div className="input-group mb-3 image text-center">
-                                <button className="btn btn-outline-secondary" value="ADD" type="button"
+                                <button className="btn btn-outline-secondary add-friend" value="ADD" type="button"
                                         onClick={this.handleClick}>Add New Friend
                                 </button>
                             </div>

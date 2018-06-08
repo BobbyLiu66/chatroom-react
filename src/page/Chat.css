@@ -24,6 +24,8 @@ p {
 
 .display-area {
     border-bottom: solid #e7e7e7 1px;
+    border-top: solid #e7e7e7 1px;
+    padding: 7px;
 }
 
 .left-area {
