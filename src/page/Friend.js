@@ -78,9 +78,8 @@ class FriendList extends Component {
                     <div className="col-md-3 left-area">
                         <div className="col-md-12">
                             <div className="input-group mb-3 image text-center">
-                                {/*<input type="text" className="form-control" onChange={this.handleChange}/>*/}
-                                <button className="btn btn-outline-secondary btn-lg" value="ADD" type="button"
-                                        onClick={this.handleClick}>Add Friend Here
+                                <button className="btn btn-outline-secondary" value="ADD" type="button"
+                                        onClick={this.handleClick}>Add New Friend
                                 </button>
                             </div>
                         </div>

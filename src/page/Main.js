@@ -55,14 +55,20 @@ class HomePage extends Component {
                             password: response.id,
                             event: "FACEBOOK"
                         });
-                        window.sessionStorage.setItem('username',response.name);
+                        window.sessionStorage.setItem('username', response.name);
                         this.props.setLoading(false);
                         this.props.inputState(false);
                     });
                 }
                 else {
-                    this.props.setLoading(false);
-                    this.props.inputState(true);
+                    if (window.sessionStorage.getItem("username")) {
+                        this.props.inputState(false);
+                        this.props.setLoading(false);
+                    }
+                    else {
+                        this.props.setLoading(false);
+                        this.props.inputState(true);
+                    }
                 }
             });
         };
