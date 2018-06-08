@@ -48,7 +48,7 @@ class FriendList extends Component {
     displayFriend(data) {
         return data.map((result) => {
             return (
-                <div className="row display-area text-center">
+                <div className="row display-area text-center" key={result.messageTime}>
                     <div className="col-md-2">
                         <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png" alt=""
                              className="image-size"/>

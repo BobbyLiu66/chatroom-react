@@ -10,7 +10,7 @@ const FriendList = (props) => {
         };
 
         return (
-            <div className="row display-area" onClick={() => props.handleClick(result.roomName)}>
+            <div className="row display-area" onClick={() => props.handleClick(result.roomName)} key={result.roomName}>
                 <div className="col-md-3 time">
                     <div style={friendColor}
                          className="image-size">{result.friend.slice(0, 2).toUpperCase()}</div>
