@@ -42,13 +42,13 @@ class FacebookButton extends Component {
                         password: response.id,
                         event: "FACEBOOK"
                     });
-                    window.sessionStorage.username = response.name;
+                    window.sessionStorage.setItem('username',response.name);
                     this.props.inputState(false);
                     this.props.setLoading(false)
                 });
             }
             else {
-                window.sessionStorage.username = undefined;
+                window.sessionStorage.removeItem('username');
                 this.props.inputState(true);
                 this.props.setLoading(true)
             }

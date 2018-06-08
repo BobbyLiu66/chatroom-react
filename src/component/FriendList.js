@@ -14,7 +14,7 @@ const FriendList = (props) => {
                 <div className="col-md-3 time">
                     <div style={friendColor}
                          className="image-size">{result.friend.slice(0, 2).toUpperCase()}</div>
-                    {!result.message.status && result.message.speaker !== window.sessionStorage.username &&
+                    {!result.message.status && result.message.speaker !== window.sessionStorage.getItem('username') &&
                     <div className="circle"/>}
                 </div>
                 <div className="col-md-9">

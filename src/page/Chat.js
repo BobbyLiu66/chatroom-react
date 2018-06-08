@@ -22,11 +22,11 @@ class Chat extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
-        socket.emit('FRIEND_LIST', {nickname: window.sessionStorage.username})
+        socket.emit('FRIEND_LIST', {nickname: window.sessionStorage.getItem('username')})
     }
 
     handleClick(roomName) {
-        socket.emit('LOAD_HISTORY', {roomName: roomName, nickname: window.sessionStorage.username});
+        socket.emit('LOAD_HISTORY', {roomName: roomName, nickname: window.sessionStorage.getItem('username')});
         this.setState({roomName: roomName, inputArea: true})
     }
 
@@ -37,7 +37,7 @@ class Chat extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let message = {
-            speaker: window.sessionStorage.username,
+            speaker: window.sessionStorage.getItem('username'),
             messageTime: new Date(),
             messageContent: this.state.inputMessage,
             roomName: this.state.roomName,
@@ -45,7 +45,7 @@ class Chat extends Component {
         socket.emit('NEW_MESSAGE', message);
         this.setState({
             chatMessage: [...this.state.chatMessage, {
-                speaker: window.sessionStorage.username,
+                speaker: window.sessionStorage.getItem('username'),
                 messageTime: new Date(),
                 messageContent: this.state.inputMessage
             }],
@@ -126,7 +126,7 @@ class Chat extends Component {
 
         socket.on('reconnect', () => {
             console.log("reconnect");
-            socket.emit('RECONNECT', {nickname: window.sessionStorage.username})
+            socket.emit('RECONNECT', {nickname: window.sessionStorage.getItem('username')})
         });
 
     }

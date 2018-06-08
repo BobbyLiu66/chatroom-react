@@ -60,7 +60,7 @@ class Login extends Component {
             else if (this.props.currentStatus === "FRIEND") {
                 socket.emit('ADD_FRIEND', {
                     inviteName: this.state.inputValue,
-                    nickname: window.sessionStorage.username,
+                    nickname: window.sessionStorage.getItem('username'),
                     messageTime: (new Date()).getTime(),
                     event: event.target.value
                 });
@@ -116,7 +116,7 @@ class Login extends Component {
                     })
                 }
                 else {
-                    window.sessionStorage.username = this.state.inputValue;
+                    window.sessionStorage.setItem('username',this.state.inputValue);
                     this.setState({
                         alertMessageStatus: true,
                         alertMessage: 'Login success!',
@@ -161,7 +161,7 @@ class Login extends Component {
             <React.Fragment>
                 <Canvas/>
                 <div className="text-center login-page">
-                    {window.sessionStorage.username !== "undefined" &&
+                    {window.sessionStorage.getItem('username') &&
                     <button type="button" className="close close-button" aria-label="Close" onClick={this.handleClick}>
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -12,7 +12,7 @@ const MessageList = ({data}) => {
         }
         flag = false;
         const nicknameColor = {
-            background: getUserColor(window.sessionStorage.username),
+            background: getUserColor(window.sessionStorage.getItem('username')),
         };
 
         const friendColor = {
@@ -25,21 +25,21 @@ const MessageList = ({data}) => {
                 </div>
 
                 <div className="col-sm-2 avatar">
-                    {chatMessage.speaker !== window.sessionStorage.username && chatMessage.speaker !== null &&
+                    {chatMessage.speaker !== window.sessionStorage.getItem('username') && chatMessage.speaker !== null &&
                     <div style={friendColor}
                          className="image-size">{chatMessage.speaker && chatMessage.speaker.slice(0, 2).toUpperCase()}</div>
                     }
                 </div>
                 <div className="col-sm-8 border-display">
-                    {chatMessage.speaker === window.sessionStorage.username ?
+                    {chatMessage.speaker === window.sessionStorage.getItem('username') ?
                         <p className="text-justify float-right">{chatMessage.messageContent}</p> :
                         <p className="text-justify">{chatMessage.messageContent}</p>}
                 </div>
 
                 <div className="col-sm-2 avatar">
-                    {chatMessage.speaker === window.sessionStorage.username &&
+                    {chatMessage.speaker === window.sessionStorage.getItem('username') &&
                     <div style={nicknameColor}
-                         className="image-size">{window.sessionStorage.username.slice(0, 2).toUpperCase()}</div>
+                         className="image-size">{window.sessionStorage.getItem('username').slice(0, 2).toUpperCase()}</div>
                     }
                 </div>
             </div>

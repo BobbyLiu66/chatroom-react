@@ -27,14 +27,14 @@ class FriendList extends Component {
         else {
             socket.emit('ADD_FRIEND_SUCCESS', {
                 nickname: event.target.value,
-                inviteName: window.sessionStorage.username
+                inviteName: window.sessionStorage.getItem('username')
             });
         }
     }
 
     componentDidMount() {
         socket.emit("NEW_FRIEND_LIST", {
-            nickname: window.sessionStorage.username
+            nickname: window.sessionStorage.getItem('username')
         });
         socket.on('LOAD_FRIEND_LIST', (data) => {
             this.setState({

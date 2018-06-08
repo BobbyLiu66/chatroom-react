@@ -56,7 +56,7 @@ class HomePage extends Component {
                             password: response.id,
                             event: "FACEBOOK"
                         });
-                        window.sessionStorage.username = response.name;
+                        window.sessionStorage.setItem('username',response.name);
                         this.props.setLoading(false);
                         this.props.inputState(false);
                     });
