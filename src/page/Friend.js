@@ -1,4 +1,3 @@
-//TODO display add friend list and optional display friend list like weixin
 import React, {Component} from 'react';
 import './Chat.css'
 import socket from '../tools/getSocket';
@@ -28,6 +27,9 @@ class FriendList extends Component {
             socket.emit('ADD_FRIEND_SUCCESS', {
                 nickname: event.target.value,
                 inviteName: window.sessionStorage.getItem('username')
+            });
+            socket.emit("NEW_FRIEND_LIST", {
+                nickname: window.sessionStorage.getItem('username')
             });
         }
     }
