@@ -19,6 +19,10 @@ class WeatherService extends Component {
         this.getWeather();
     }
 
+    componentWillUnmount() {
+        this.setState({displayWeather: false})
+    }
+
     getWeather() {
         axios({
             method: 'Get',

@@ -13,10 +13,8 @@ class FriendList extends Component {
         super(props);
         this.state = {
             addFriendList: [],
-            search: ''
         };
         this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this)
     }
 
     handleClick(event) {
@@ -45,6 +43,10 @@ class FriendList extends Component {
         })
     }
 
+    componentWillUnmount() {
+        socket.off("LOAD_FRIEND_LIST");
+    }
+
     displayFriend(data) {
         return data.map((result) => {
             return (
@@ -64,11 +66,6 @@ class FriendList extends Component {
                 </div>
             )
         })
-    }
-
-    handleChange(event) {
-        event.preventDefault();
-        this.setState({search: event.target.value});
     }
 
     render() {

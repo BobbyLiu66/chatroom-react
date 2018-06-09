@@ -72,13 +72,6 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        // //TODO
-        // socket.on('ADD_FRIEND_REQUEST', (data) => {
-        //
-        //     let result = window.confirm(`${data.nickname} want to be friend with you`);
-        //     result && socket.emit('ADD_FRIEND_SUCCESS', data)
-        // });
-
         socket.on('LOAD_HISTORY', (data, prevData) => {
             this.setState((prevState) => {
                 let newFriendList = prevState.friendList;
@@ -123,12 +116,18 @@ class Chat extends Component {
             this.state.roomName === data.roomName && this.setState({chatMessage: [...this.state.chatMessage, data]})
         });
 
-
         socket.on('reconnect', () => {
-            console.log("reconnect");
             socket.emit('RECONNECT', {nickname: window.sessionStorage.getItem('username')})
         });
 
+    }
+
+    componentWillUnmount(){
+        socket.off("LOAD_HISTORY");
+        socket.off("FRIEND_LIST");
+        socket.off("ADD_FRIEND_SUCCESS");
+        socket.off("NEW_MESSAGE");
+        socket.off("reconnect");
     }
 
     componentDidUpdate() {
