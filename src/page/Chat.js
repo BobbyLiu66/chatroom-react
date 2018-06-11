@@ -8,7 +8,6 @@ import MessageList from '../component/MessageList'
 const LOAD_FRIEND_LIST_ERROR = 'load friend list wrong, please try again later';
 
 class Chat extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -116,13 +115,12 @@ class Chat extends Component {
             this.state.roomName === data.roomName && this.setState({chatMessage: [...this.state.chatMessage, data]})
         });
 
-        socket.on('reconnect', () => {
+        socket.on('RECONNECT', () => {
             socket.emit('RECONNECT', {nickname: window.sessionStorage.getItem('username')})
         });
-
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         socket.off("LOAD_HISTORY");
         socket.off("FRIEND_LIST");
         socket.off("ADD_FRIEND_SUCCESS");

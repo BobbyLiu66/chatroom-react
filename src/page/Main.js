@@ -7,7 +7,6 @@ import './Main.css';
 import {connect} from 'react-redux'
 import Chat from "./Chat";
 import Friend from '../page/Friend'
-import Setting from '../page/Setting'
 import Loading from '../component/Loading'
 import socket from "../tools/getSocket";
 import {inputState, setPicture, setLoading} from "../actions";
@@ -94,7 +93,6 @@ class HomePage extends Component {
                                 <Slidebar/>
                                 {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}
                                 {this.props.mainAreaDisplayed === 'FRIEND' && <Friend/>}
-                                {this.props.mainAreaDisplayed === 'SETTING' && <Setting/>}
                             </div>
                         </div>
                     </React.Fragment>

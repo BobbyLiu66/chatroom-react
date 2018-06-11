@@ -1,4 +1,3 @@
-// export const weatherUrl = "https://localhost:3002/weather?type=current";
 export const weatherUrl = "https://www.geekliubo.com:3002/weather?type=current";
 export const imgUrl = "https://storage.googleapis.com/chatroom.geekliubo.com/weather/";
 export const weatherCode = {
@@ -10,6 +9,7 @@ export const weatherCode = {
     mist: 7,
     drizzle: 3
 };
+
 export const weatherImg = {
     sunny: "sky.jpeg",
     rain: "rain.jpeg",

@@ -1,6 +1,5 @@
 import {INPUTSTATE, ADDFRIEND, SETPICTURE, SLIDEBAR, LOADING} from "../constants/auction_type";
 
-
 const initialState = {
     inputPage: true,
     currentStatus: 'LOGIN',

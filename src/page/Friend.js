@@ -36,6 +36,7 @@ class FriendList extends Component {
         socket.emit("NEW_FRIEND_LIST", {
             nickname: window.sessionStorage.getItem('username')
         });
+
         socket.on('LOAD_FRIEND_LIST', (data) => {
             this.setState({
                 addFriendList: data.newFriendList

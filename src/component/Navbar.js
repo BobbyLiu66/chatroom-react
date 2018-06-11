@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './Navbar.css'
 import {connect} from "react-redux";
 import {inputState} from "../actions";
 

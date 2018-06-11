@@ -18,6 +18,7 @@
         transform: scale(1);
     }
 }
+
 @-webkit-keyframes lds-ellipsis3 {
     0%, 25% {
         left: 32px;
@@ -38,6 +39,7 @@
         transform: scale(1);
     }
 }
+
 @keyframes lds-ellipsis2 {
     0% {
         -webkit-transform: scale(1);
@@ -48,6 +50,7 @@
         transform: scale(0);
     }
 }
+
 @-webkit-keyframes lds-ellipsis2 {
     0% {
         -webkit-transform: scale(1);
@@ -58,6 +61,7 @@
         transform: scale(0);
     }
 }
+
 @keyframes lds-ellipsis {
     0% {
         left: 32px;
@@ -83,6 +87,7 @@
         transform: scale(0);
     }
 }
+
 @-webkit-keyframes lds-ellipsis {
     0% {
         left: 32px;
@@ -108,9 +113,11 @@
         transform: scale(0);
     }
 }
+
 .lds-ellipsis {
     position: relative;
 }
+
 .lds-ellipsis > div {
     position: absolute;
     -webkit-transform: translate(-50%, -50%);
@@ -118,6 +125,7 @@
     width: 40px;
     height: 40px;
 }
+
 .lds-ellipsis div > div {
     width: 40px;
     height: 40px;
@@ -129,31 +137,37 @@
     -webkit-animation: lds-ellipsis 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
     animation: lds-ellipsis 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
 }
+
 .lds-ellipsis div:nth-child(1) div {
     -webkit-animation: lds-ellipsis2 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
     animation: lds-ellipsis2 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
     background: #ce64a6;
 }
+
 .lds-ellipsis div:nth-child(2) div {
     -webkit-animation-delay: -0.5s;
     animation-delay: -0.5s;
     background: #bda0b2;
 }
+
 .lds-ellipsis div:nth-child(3) div {
     -webkit-animation-delay: -0.25s;
     animation-delay: -0.25s;
     background: #45aee7;
 }
+
 .lds-ellipsis div:nth-child(4) div {
     -webkit-animation-delay: 0s;
     animation-delay: 0s;
     background: #0055a5;
 }
+
 .lds-ellipsis div:nth-child(5) div {
     -webkit-animation: lds-ellipsis3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
     animation: lds-ellipsis3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
     background: #ce64a6;
 }
+
 .lds-ellipsis {
     width: 100px !important;
     height: 100px !important;
