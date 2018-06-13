@@ -63,6 +63,14 @@ p {
     display: inline-block;
 }
 
+.preview-image-size {
+    margin: 10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #888888;
+}
+
 .avatar{
     text-align: center;
     vertical-align: middle;
