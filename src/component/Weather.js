@@ -20,7 +20,7 @@ class WeatherService extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({displayWeather: false})
+        axios.CancelToken.source().cancel();
     }
 
     getWeather() {
