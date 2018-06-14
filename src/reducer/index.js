@@ -1,4 +1,4 @@
-import {INPUTSTATE, ADDFRIEND, SETPICTURE, SLIDEBAR, LOADING} from "../constants/auction_type";
+import {INPUTSTATE, ADDFRIEND, SLIDEBAR, LOADING} from "../constants/auction_type";
 
 const initialState = {
     inputPage: true,
@@ -19,10 +19,6 @@ const rootReducer = (state = initialState, action) => {
             return Object.assign({
                 inputPage: action.payload,
                 currentStatus: 'FRIEND'
-            });
-        case SETPICTURE:
-            return Object.assign({
-                picture: action.payload
             });
         case SLIDEBAR:
             return Object.assign({

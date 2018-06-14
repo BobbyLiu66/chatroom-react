@@ -9,15 +9,12 @@ import Chat from "./Chat";
 import Friend from '../page/Friend'
 import Loading from '../component/Loading'
 import socket from "../tools/getSocket";
-import {inputState, setPicture, setLoading} from "../actions";
+import {inputState, setLoading} from "../actions";
 import Setting from "./Setting";
 
 const mapDispatchToProps = dispatch => {
     return {
         inputState: (state) => dispatch(inputState(state)),
-        setPicture: (url) => {
-            dispatch(setPicture(url))
-        },
         setLoading: (state) => {
             dispatch(setLoading(state))
         }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import socket from "../tools/getSocket";
-import {inputState, setLoading, setPicture} from "../actions";
+import {inputState, setLoading} from "../actions";
 import {connect} from "react-redux";
 
 const mapStateToProps = state => {
@@ -10,9 +10,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         inputState: (state) => dispatch(inputState(state)),
-        setPicture: (url) => {
-            dispatch(setPicture(url))
-        },
         setLoading: (state) => {
             dispatch(setLoading(state))
         }
@@ -32,7 +29,7 @@ class FacebookButton extends Component {
                     'GET',
                     {"redirect": "false"},
                     (response) => {
-                        this.props.setPicture(response.data.url)
+                        window.sessionStorage.setItem('avatar',response.data.url)
                     }
                 );
 

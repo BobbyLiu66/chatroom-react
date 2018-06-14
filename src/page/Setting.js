@@ -1,4 +1,3 @@
-//TODO change nick name. avatar.
 import React, {Component} from 'react';
 import socket from "../tools/getSocket";
 

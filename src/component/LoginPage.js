@@ -117,6 +117,7 @@ class Login extends Component {
                 }
                 else {
                     window.sessionStorage.setItem('username',this.state.inputValue);
+                    window.sessionStorage.setItem('avatar',data.avatar);
                     this.setState({
                         alertMessageStatus: true,
                         alertMessage: 'Login success!',
