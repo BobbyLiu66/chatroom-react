@@ -6,6 +6,7 @@ This project is the second version of [chat-room](https://github.com/BobbyLiu66/
 ## Update
 I added some canvas feature make the main page look like not so boring any more and support login with Facebook account.
 I changed the UI to a dark theme and change the logic about adding friend. The feature about upload avatar is not finished yet. So I just update the screenshot about the main page.
+And I update the security level of this website by using SSL as well.
 
 ### Skills
 * React
