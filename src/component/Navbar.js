@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 class Nav extends Component {
     constructor() {
         super();
-        this.state = {imgUrl:''};
+        this.state = {imgUrl: ''};
         this.handleClick = this.handleClick.bind(this)
     }
 
@@ -29,7 +29,9 @@ class Nav extends Component {
         return (
             <nav className="navbar navbar-dark sticky-top bg-dark">
                 <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-                    <img src={window.sessionStorage.getItem('avatar')} alt="" className="image-size"/>
+                    <img
+                        src={"https://chat-picture.s3.amazonaws.com/" + window.sessionStorage.getItem('username') + ".png"}
+                        alt="" className="image-size"/>
                     {window.sessionStorage.getItem('username')}
                 </a>
 

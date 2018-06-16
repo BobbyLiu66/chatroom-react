@@ -7,7 +7,9 @@ class Setting extends Component {
         this.state = {
             imageUrl:'',
             alertMessageStatus:false,
-            alertMessage:''
+            alertMessage:'',
+            photo:'',
+            fileType:''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this)
@@ -17,13 +19,16 @@ class Setting extends Component {
         const reader = new FileReader();
         reader.onload = function (e) {
             this.setState({imageUrl:e.target.result})
-        }.bind(this);
+            }.bind(this);
         reader.readAsDataURL(event.target.files[0]);
+        this.setState({photo:event.target.files[0],fileType:/[^.]+$/.exec(event.target.files[0].name)[0]})
+
     }
 
     handleClick(){
-        if(this.state.imageUrl){
-            socket.emit('AVATAR',{nickname:window.sessionStorage.getItem('username'),avatar:this.state.imageUrl});
+        if(this.state.photo){
+            socket.emit('AVATAR',{nickname:window.sessionStorage.getItem('username'),photo:this.state.photo,fileType:this.state.fileType});
+            //TODO
             this.setState({alertMessageStatus:true,alertMessage:'Set Avatar Success'});
         }
         else{
