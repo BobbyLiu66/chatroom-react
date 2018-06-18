@@ -19,3 +19,7 @@ export const weatherImg = {
     mist: "mist.jpeg",
     drizzle: "drizzle.jpeg"
 };
+
+export const avatarUrl = (username)=>{
+    return `https://s3.amazonaws.com/chat-picture/${username}.png`
+};

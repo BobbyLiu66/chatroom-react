@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Weather.css'
 import './Loading.css'
 import Loading from './Loading'
-import {weatherUrl, imgUrl, weatherCode, weatherImg} from "../tools/weatherType";
+import {weatherUrl, imgUrl, weatherCode, weatherImg} from "../tools/constant";
 
 class WeatherService extends Component {
     constructor(props) {

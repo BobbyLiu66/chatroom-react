@@ -4,6 +4,8 @@ import './Chat.css'
 import socket from '../tools/getSocket';
 import FriendList from '../component/FriendList'
 import MessageList from '../component/MessageList'
+import {avatarUrl} from "../tools/constant";
+import axios from "axios/index";
 
 const LOAD_FRIEND_LIST_ERROR = 'load friend list wrong, please try again later';
 
@@ -42,6 +44,7 @@ class Chat extends Component {
             roomName: this.state.roomName,
         };
         socket.emit('NEW_MESSAGE', message);
+        //TODO check img url
         this.setState({
             chatMessage: [...this.state.chatMessage, {
                 speaker: window.sessionStorage.getItem('username'),
@@ -60,6 +63,18 @@ class Chat extends Component {
         this.setState({
             friendList: newFriendList
         });
+        // newFriendList.map((friend) => {
+        //     return axios({
+        //         method: 'GET',
+        //         url: avatarUrl(friend.friend),
+        //     }).catch(()=>{
+        //         friend.imgUrl = avatarUrl(friend.friend);
+        //         this.setState({
+        //             friendList: newFriendList
+        //         });
+        //     });
+        // });
+
     }
 
     scrollToBottom() {
@@ -89,6 +104,18 @@ class Chat extends Component {
         });
 
         socket.on('FRIEND_LIST', (data) => {
+            data.message.map((friend) => {
+                friend.imgUrl = avatarUrl(friend.friend);
+                return axios({
+                    method: 'GET',
+                    url: avatarUrl(friend.friend),
+                }).catch(() => {
+                    friend.imgUrl = avatarUrl("default");
+                    this.setState({
+                        friendList: data.message
+                    });
+                });
+            });
             data.err ? alert(LOAD_FRIEND_LIST_ERROR) : this.setState({friendList: data.message});
         });
 
