@@ -27,6 +27,7 @@ class Chat extends Component {
     }
 
     handleClick(roomName) {
+        //TODO Redux set two image url
         socket.emit('LOAD_HISTORY', {roomName: roomName, nickname: window.sessionStorage.getItem('username')});
         this.setState({roomName: roomName, inputArea: true})
     }
@@ -44,7 +45,6 @@ class Chat extends Component {
             roomName: this.state.roomName,
         };
         socket.emit('NEW_MESSAGE', message);
-        //TODO check img url
         this.setState({
             chatMessage: [...this.state.chatMessage, {
                 speaker: window.sessionStorage.getItem('username'),
@@ -63,17 +63,6 @@ class Chat extends Component {
         this.setState({
             friendList: newFriendList
         });
-        // newFriendList.map((friend) => {
-        //     return axios({
-        //         method: 'GET',
-        //         url: avatarUrl(friend.friend),
-        //     }).catch(()=>{
-        //         friend.imgUrl = avatarUrl(friend.friend);
-        //         this.setState({
-        //             friendList: newFriendList
-        //         });
-        //     });
-        // });
 
     }
 

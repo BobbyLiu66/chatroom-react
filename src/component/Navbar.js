@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {inputState} from "../actions";
+import {avatarUrl} from "../tools/constant"
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -30,7 +31,7 @@ class Nav extends Component {
             <nav className="navbar navbar-dark sticky-top bg-dark">
                 <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
                     <img
-                        src={"https://s3.amazonaws.com/chat-picture/" + window.sessionStorage.getItem('username') + ".png"}
+                        src={avatarUrl(window.sessionStorage.getItem('username'))}
                         alt="" className="image-size"/>
                     {window.sessionStorage.getItem('username')}
                 </a>
