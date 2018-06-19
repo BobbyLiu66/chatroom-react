@@ -5,11 +5,20 @@ import socket from '../tools/getSocket';
 import FriendList from '../component/FriendList'
 import MessageList from '../component/MessageList'
 import {avatarUrl} from "../tools/constant";
-import axios from "axios/index";
+import {setFriendAvatar} from "../actions";
+import {connect} from "react-redux";
 
 const LOAD_FRIEND_LIST_ERROR = 'load friend list wrong, please try again later';
 
-class Chat extends Component {
+const mapStateToProps = state => {
+    return {avatarUser: state.avatarUser, avatarFriend: state.avatarFriend};
+};
+
+const mapDispatchToProps = dispatch => {
+    return {setFriendAvatar: (imgUrl) => dispatch(setFriendAvatar(imgUrl))}
+};
+
+class ChatPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,10 +35,10 @@ class Chat extends Component {
         socket.emit('FRIEND_LIST', {nickname: window.sessionStorage.getItem('username')})
     }
 
-    handleClick(roomName) {
-        //TODO Redux set two image url
-        socket.emit('LOAD_HISTORY', {roomName: roomName, nickname: window.sessionStorage.getItem('username')});
-        this.setState({roomName: roomName, inputArea: true})
+    handleClick(result) {
+        this.props.setFriendAvatar(result.imgUrl);
+        socket.emit('LOAD_HISTORY', {roomName: result.roomName, nickname: window.sessionStorage.getItem('username')});
+        this.setState({roomName: result.roomName, inputArea: true})
     }
 
     handleChange(event) {
@@ -95,15 +104,21 @@ class Chat extends Component {
         socket.on('FRIEND_LIST', (data) => {
             data.message.map((friend) => {
                 friend.imgUrl = avatarUrl(friend.friend);
-                return axios({
-                    method: 'GET',
-                    url: avatarUrl(friend.friend),
+                return new Promise(function (resolve, reject) {
+                    const img = new Image();
+                    img.onload = function () {
+                        resolve()
+                    };
+                    img.onerror = function () {
+                        reject()
+                    };
+                    img.src = friend.imgUrl
                 }).catch(() => {
                     friend.imgUrl = avatarUrl("default");
                     this.setState({
                         friendList: data.message
                     });
-                });
+                })
             });
             data.err ? alert(LOAD_FRIEND_LIST_ERROR) : this.setState({friendList: data.message});
         });
@@ -157,7 +172,7 @@ class Chat extends Component {
                     </div>
                     <div className="col-md-7 offset-1">
                         <div className="message-area" ref="messageList">
-                            <MessageList data={this.state.chatMessage}/>
+                            <MessageList data={this.state.chatMessage} imgUrl={this.props}/>
                         </div>
                     </div>
                 </div>
@@ -177,5 +192,7 @@ class Chat extends Component {
         );
     }
 }
+
+const Chat = connect(mapStateToProps, mapDispatchToProps)(ChatPage);
 
 export default Chat;

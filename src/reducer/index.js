@@ -1,33 +1,49 @@
-import {INPUTSTATE, ADDFRIEND, SLIDEBAR, LOADING} from "../constants/auction_type";
+import {INPUTSTATE, ADDFRIEND, SLIDEBAR, LOADING, FRIENDAVATAR, USERAVATAR} from "../constants/auction_type";
 
 const initialState = {
     inputPage: true,
     currentStatus: 'LOGIN',
     picture: '',
     mainAreaDisplayed: '',
-    loading: true
+    loading: true,
+    avatarFriend: '',
+    avatarUser: ''
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case INPUTSTATE:
-            return Object.assign({
+            return {
+                ...state,
                 inputPage: action.payload,
                 currentStatus: 'LOGIN'
-            });
+            };
         case ADDFRIEND:
-            return Object.assign({
+            return {
+                ...state,
                 inputPage: action.payload,
                 currentStatus: 'FRIEND'
-            });
+            };
         case SLIDEBAR:
-            return Object.assign({
+            return {
+                ...state,
                 mainAreaDisplayed: action.payload
-            });
+            };
         case LOADING:
-            return Object.assign({
+            return {
+                ...state,
                 loading: action.payload
-            });
+            };
+        case FRIENDAVATAR:
+            return {
+                ...state,
+                avatarFriend: action.payload
+            };
+        case USERAVATAR:
+            return {
+                ...state,
+                avatarUser: action.payload
+            };
         default:
             return state
     }

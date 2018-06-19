@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MessageList = ({data}) => {
+const MessageList = (props) => {
     let flagMinutes, flag = true;
-    return data.map((chatMessage) => {
+    return props.data.map((chatMessage) => {
         let displayTime;
         let messageTime = new Date(chatMessage.messageTime);
         if (flag || (messageTime.getMinutes() - 5) >= flagMinutes) {
@@ -10,7 +10,6 @@ const MessageList = ({data}) => {
             displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
         }
         flag = false;
-        //TODO read image url from Redux
         return (
             <div className="row message-block" key={chatMessage.messageTime}>
                 <div className="col-sm-12">
@@ -18,8 +17,8 @@ const MessageList = ({data}) => {
                 </div>
                 <div className="col-sm-2 avatar">
                     {chatMessage.speaker !== window.sessionStorage.getItem('username') && chatMessage.speaker !== null &&
-                        <img src={} alt=""
-                        className="image-size"/>
+                    <img src={props.imgUrl.avatarFriend} alt={chatMessage.speaker}
+                         className="image-size"/>
                     }
                 </div>
                 <div className="col-sm-8 border-display">
@@ -29,7 +28,7 @@ const MessageList = ({data}) => {
                 </div>
                 <div className="col-sm-2 avatar">
                     {chatMessage.speaker === window.sessionStorage.getItem('username') &&
-                    <img src={} alt=""
+                    <img src={props.imgUrl.avatarUser} alt={chatMessage.speaker}
                          className="image-size"/>
                     }
                 </div>

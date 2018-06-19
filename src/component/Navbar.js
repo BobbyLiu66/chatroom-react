@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {inputState} from "../actions";
+import {inputState, setUserAvatar} from "../actions";
 import {avatarUrl} from "../tools/constant"
 
 const mapDispatchToProps = dispatch => {
     return {
         inputState: (state) => dispatch(inputState(state)),
+        setUserAvatar: (input) => dispatch(setUserAvatar(input))
     }
+};
+
+const mapStateToProps = state => {
+    return {avatarUser: state.avatarUser};
 };
 
 class Nav extends Component {
     constructor() {
         super();
-        this.state = {imgUrl: ''};
         this.handleClick = this.handleClick.bind(this)
     }
 
@@ -26,13 +30,31 @@ class Nav extends Component {
         });
     }
 
+    componentDidMount() {
+        const userImg = avatarUrl(window.sessionStorage.getItem('username'));
+        return new Promise(function(resolve, reject){
+            const img = new Image();
+            img.onload = function(){
+                resolve()
+            };
+            img.onerror = function(){
+                reject()
+            };
+            img.src = userImg
+        }).then(()=>{
+            this.props.setUserAvatar(userImg)
+        },()=>{
+            this.props.setUserAvatar(avatarUrl("default"))
+        })
+    }
+
     render() {
         return (
             <nav className="navbar navbar-dark sticky-top bg-dark">
                 <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
                     <img
-                        src={avatarUrl(window.sessionStorage.getItem('username'))}
-                        alt="" className="image-size"/>
+                        src={this.props.avatarUser}
+                        alt={window.sessionStorage.getItem('username')} className="image-size"/>
                     {window.sessionStorage.getItem('username')}
                 </a>
 
@@ -45,6 +67,6 @@ class Nav extends Component {
 }
 
 
-const Navbar = connect(null, mapDispatchToProps)(Nav);
+const Navbar = connect(mapStateToProps, mapDispatchToProps)(Nav);
 
 export default Navbar;

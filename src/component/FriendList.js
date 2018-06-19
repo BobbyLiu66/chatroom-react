@@ -5,7 +5,7 @@ const FriendList = (props) => {
         let messageTime = new Date(result.message.messageTime);
         let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
         return (
-            <div className="row display-area" onClick={() => props.handleClick(result.roomName)} key={result.roomName}>
+            <div className="row display-area" onClick={() => props.handleClick(result)} key={result.roomName}>
                 <div className="col-md-3 time">
                     <img src={result.imgUrl} alt=""
                          className="image-size"/>

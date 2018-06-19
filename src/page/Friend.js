@@ -3,6 +3,7 @@ import './Chat.css'
 import socket from '../tools/getSocket';
 import {addFriend} from "../actions";
 import {connect} from 'react-redux'
+import {avatarUrl} from "../tools/constant";
 
 const mapDispatchToProps = dispatch => {
     return {addFriend: (input) => dispatch(addFriend(input))}
@@ -38,6 +39,23 @@ class FriendList extends Component {
         });
 
         socket.on('LOAD_FRIEND_LIST', (data) => {
+            data.newFriendList.map((friend) => {
+                friend.imgUrl = avatarUrl(friend.friend);
+                return new Promise(function (resolve, reject) {
+                    const img = new Image();
+                    img.onload = function () {
+                        resolve()
+                    };
+                    img.onerror = function () {
+                        reject()
+                    };
+                    img.src = friend.imgUrl
+                }).catch(() => {
+                    friend.imgUrl = avatarUrl("default");
+                    this.setState({
+                        addFriendList: data.newFriendList
+                    });
+                })});
             this.setState({
                 addFriendList: data.newFriendList
             })
@@ -53,7 +71,7 @@ class FriendList extends Component {
             return (
                 <div className="row display-area text-center" key={result.messageTime}>
                     <div className="col-md-2">
-                        <img src={"https://s3.amazonaws.com/chat-picture/" + result.nickname + ".png"} alt=""
+                        <img src={result.imgUrl} alt={result.nickname}
                              className="image-size"/>
                     </div>
                     <div className="col-md-9 offset-1">
