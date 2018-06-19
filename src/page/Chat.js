@@ -8,8 +8,6 @@ import {avatarUrl} from "../tools/constant";
 import {setFriendAvatar} from "../actions";
 import {connect} from "react-redux";
 
-const LOAD_FRIEND_LIST_ERROR = 'load friend list wrong, please try again later';
-
 const mapStateToProps = state => {
     return {avatarUser: state.avatarUser, avatarFriend: state.avatarFriend};
 };
@@ -120,7 +118,7 @@ class ChatPage extends Component {
                     });
                 })
             });
-            data.err ? alert(LOAD_FRIEND_LIST_ERROR) : this.setState({friendList: data.message});
+            data.err ? this.setState({error: "Try again later"}) : this.setState({friendList: data.message});
         });
 
         socket.on('ADD_FRIEND_SUCCESS', (data, friendName) => {
