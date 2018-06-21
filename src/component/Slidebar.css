@@ -1,7 +1,7 @@
 .fill {
     height: 100%;
 }
-img {
+.slide-img {
     width: 50px;
     height: 50px;
 }
@@ -14,5 +14,10 @@ img {
 .col-centered{
     float: none;
     margin: 0 auto;
-    padding-top: 250px;
+    /*padding-top: 100px;*/
+}
+
+.avatar-list{
+    margin: 0 auto;
+    padding-top: 20px;
 }
