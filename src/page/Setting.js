@@ -8,7 +8,7 @@ class Setting extends Component {
         imageUrl: '',
         alertMessageStatus: false,
         alertMessage: '',
-        photo: '',
+        image: '',
         fileType: '',
         allowZoomOut: false,
         borderRadius: 200,
@@ -16,11 +16,29 @@ class Setting extends Component {
         preview: null,
         width: 200,
         height: 200,
+        url: ''
     };
+    savedImg = React.createRef();
 
-    handleSave = () => {
-        const img = this.editor.getImageScaledToCanvas().toDataURL();
-        console.log(img)
+    handleSave = (e) => {
+        console.log(e);
+        fetch(this.editor.getImage().toDataURL())
+            .then(res => res.blob())
+            .then(blob => (this.setState({url: window.URL.createObjectURL(blob)})));
+
+        if (this.state.image) {
+            socket.emit('AVATAR', {
+                nickname: window.sessionStorage.getItem('username'),
+                photo: this.editor.getImage().toDataURL("image/png"),
+                fileType: this.state.fileType
+            });
+        }
+        else {
+            this.setState({alertMessageStatus: true, alertMessage: 'Choose your avatar'});
+        }
+        setTimeout(() => {
+            this.setState({alertMessageStatus: false, alertMessage: ''});
+        }, 5000)
     };
 
     setEditorRef = editor => {
@@ -36,14 +54,9 @@ class Setting extends Component {
         this.setState({scale})
     };
 
-    // handleChange = (event) => {
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //         this.setState({imageUrl: e.target.result})
-    //     }.bind(this);
-    //     reader.readAsDataURL(event.target.files[0]);
-    //     this.setState({photo: event.target.files[0], fileType: /[^.]+$/.exec(event.target.files[0].name)[0]})
-    // };
+    handleChange = (event) => {
+        this.setState({url: event.target.files[0]})
+    };
 
     componentDidMount() {
         socket.on("AVATAR", (data) => {
@@ -54,7 +67,7 @@ class Setting extends Component {
                 this.setState({alertMessageStatus: true, alertMessage: 'Set Avatar Success'});
                 setTimeout(() => {
                     window.location.reload()
-                })
+                }, 5000)
             }
         })
     }
@@ -84,7 +97,7 @@ class Setting extends Component {
                     {this.state.alertMessage}
                 </div>}
                 <h5>Drop your avatar file here</h5>
-                <div className="input-group">
+                <div className="form-group">
                     <Dropzone
                         onDrop={this.handleDrop}
                         disableClick
@@ -103,7 +116,7 @@ class Setting extends Component {
                         </div>
                     </Dropzone>
                 </div>
-                <div className="input-group avatar-list text-center">
+                <div className="form-group avatar-list text-center">
                     <span className='text-center'>Zoom</span>
                     <input
                         id="scale"
@@ -117,9 +130,10 @@ class Setting extends Component {
                     />
                 </div>
 
-                <div className="input-group avatar-list text-center">
+                <div className="form-group avatar-list text-center">
                     <input type="button" className='btn btn-outline-secondary' onClick={this.handleSave} value="Save"/>
                 </div>
+                <img src={this.state.url} alt="" ref={this.savedImg} style={{display: "none"}}/>
             </div>
         )
     }

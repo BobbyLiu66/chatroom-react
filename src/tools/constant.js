@@ -21,5 +21,6 @@ export const weatherImg = {
 };
 
 export const avatarUrl = (username)=>{
-    return `https://s3.amazonaws.com/chat-picture/${username}.png`
+    return `https://chat-picture.s3.amazonaws.com/${username}.png`
+    // return `https://s3.amazonaws.com/chat-picture/${username}.png`
 };
