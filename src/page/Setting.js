@@ -16,16 +16,13 @@ class Setting extends Component {
         preview: null,
         width: 200,
         height: 200,
-        url: ''
+        buttonState: false
     };
-    savedImg = React.createRef();
 
-    handleSave = (e) => {
-        console.log(e);
-        fetch(this.editor.getImage().toDataURL())
-            .then(res => res.blob())
-            .then(blob => (this.setState({url: window.URL.createObjectURL(blob)})));
-
+    handleSave = () => {
+        this.setState((preState) => {
+            return {buttonState: !preState.buttonState}
+        });
         if (this.state.image) {
             socket.emit('AVATAR', {
                 nickname: window.sessionStorage.getItem('username'),
@@ -34,7 +31,13 @@ class Setting extends Component {
             });
         }
         else {
-            this.setState({alertMessageStatus: true, alertMessage: 'Choose your avatar'});
+            this.setState((preState) => {
+                return {
+                    buttonState: !preState.buttonState,
+                    alertMessageStatus: true,
+                    alertMessage: 'Choose your avatar'
+                }
+            });
         }
         setTimeout(() => {
             this.setState({alertMessageStatus: false, alertMessage: ''});
@@ -54,40 +57,31 @@ class Setting extends Component {
         this.setState({scale})
     };
 
-    handleChange = (event) => {
-        this.setState({url: event.target.files[0]})
-    };
-
     componentDidMount() {
         socket.on("AVATAR", (data) => {
             if (data.err) {
-                this.setState({alertMessageStatus: true, alertMessage: data.err});
+                this.setState((preState) => {
+                    return {
+                        buttonState: !preState.buttonState,
+                        alertMessageStatus: true,
+                        alertMessage: data.err
+                    }
+                });
             }
             else {
-                this.setState({alertMessageStatus: true, alertMessage: 'Set Avatar Success'});
+                this.setState((preState) => {
+                    return {
+                        buttonState: !preState.buttonState,
+                        alertMessageStatus: true,
+                        alertMessage: 'Set Avatar Success'
+                    }
+                });
                 setTimeout(() => {
                     window.location.reload()
                 }, 5000)
             }
         })
     }
-
-    // handleClick() {
-    //     if (this.state.photo) {
-    //         socket.emit('AVATAR', {
-    //             nickname: window.sessionStorage.getItem('username'),
-    //             photo: this.state.photo,
-    //             fileType: this.state.fileType
-    //         });
-    //     }
-    //     else {
-    //         this.setState({alertMessageStatus: true, alertMessage: 'Choose your avatar'});
-    //     }
-    //     setTimeout(() => {
-    //         this.setState({alertMessageStatus: false, alertMessage: ''});
-    //     }, 5000)
-    // }
-
 
     render() {
         return (
@@ -131,9 +125,9 @@ class Setting extends Component {
                 </div>
 
                 <div className="form-group avatar-list text-center">
-                    <input type="button" className='btn btn-outline-secondary' onClick={this.handleSave} value="Save"/>
+                    <button type="button" className='btn btn-outline-secondary' disabled={this.state.buttonState === true}
+                            onClick={this.handleSave}>{this.state.buttonState ? "Uploading..." : "Save"}</button>
                 </div>
-                <img src={this.state.url} alt="" ref={this.savedImg} style={{display: "none"}}/>
             </div>
         )
     }
