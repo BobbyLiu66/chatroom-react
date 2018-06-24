@@ -1,4 +1,4 @@
-import {INPUTSTATE, ADDFRIEND, SLIDEBAR, LOADING, FRIENDAVATAR, USERAVATAR} from "../constants/auction_type";
+import {INPUTSTATE, ADDFRIEND, SLIDEBAR, LOADING, FRIENDAVATAR, USERAVATAR} from '../constants/auction_type';
 
 const initialState = {
     inputPage: true,

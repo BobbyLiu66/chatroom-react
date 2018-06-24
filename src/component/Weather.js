@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Weather.css'
 import './Loading.css'
 import Loading from './Loading'
-import {weatherUrl, imgUrl, weatherCode, weatherImg} from "../tools/constant";
+import {weatherUrl, imgUrl, weatherCode, weatherImg} from '../tools/constant';
 
 class WeatherService extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class WeatherService extends Component {
             method: 'Get',
             url: weatherUrl,
         }).then((response) => {
-            let data = response.data;
+            const data = response.data;
             let img = imgUrl;
             switch (true) {
                 case (data.weather[0].id === weatherCode.sunny):
@@ -70,10 +70,10 @@ class WeatherService extends Component {
 
     render() {
         return (
-            <div className="weather">
-                <div className="row justify-content-md-center">
-                    <div className="col-md-auto">
-                        {this.state.weather ? <img className="weather-image"
+            <div className='weather'>
+                <div className='row justify-content-md-center'>
+                    <div className='col-md-auto'>
+                        {this.state.weather ? <img className='weather-image'
                                                    src={`https://openweathermap.org/img/w/${this.state.weather[0].icon}.png`}
                                                    onClick={this.handleClick}
                                                    alt={this.state.weather[0].description}/> :
@@ -81,16 +81,16 @@ class WeatherService extends Component {
                     </div>
                 </div>
 
-                <div className="row justify-content-md-center">
-                    <div className="col-md-auto">
+                <div className='row justify-content-md-center'>
+                    <div className='col-md-auto'>
                         {this.state.displayWeather &&
-                        <div className="card weather-card text-center">
-                            <img className="card-img-top weather-bg" src={this.state.img}
+                        <div className='card weather-card text-center'>
+                            <img className='card-img-top weather-bg' src={this.state.img}
                                  alt={this.state.weather[0].description}/>
-                            <div className="card-body">
-                                <h5 className="card-title">{this.state.name}</h5>
-                                <p className="card-text text-muted">{this.state.weather[0].description}</p>
-                                <p className="card-text">{Math.round(this.state.main.temp - 273.15)}°C</p>
+                            <div className='card-body'>
+                                <h5 className='card-title'>{this.state.name}</h5>
+                                <p className='card-text text-muted'>{this.state.weather[0].description}</p>
+                                <p className='card-text'>{Math.round(this.state.main.temp - 273.15)}°C</p>
                             </div>
                         </div>
                         }

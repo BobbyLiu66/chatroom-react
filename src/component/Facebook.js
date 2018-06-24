@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import socket from "../tools/getSocket";
-import {inputState, setLoading} from "../actions";
-import {connect} from "react-redux";
+import socket from '../tools/getSocket';
+import {inputState, setLoading} from '../actions';
+import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
     return {inputPage: state.inputPage, currentStatus: state.currentStatus};
@@ -27,7 +27,7 @@ class FacebookButton extends Component {
                 window.FB.api(
                     `/${response.authResponse.userId}/picture`,
                     'GET',
-                    {"redirect": "false"},
+                    {'redirect': 'false'},
                     (response) => {
                         window.sessionStorage.setItem('avatar',response.data.url)
                     }
@@ -37,7 +37,7 @@ class FacebookButton extends Component {
                     socket.emit('USER_LOGIN', {
                         nickname: response.name,
                         password: response.id,
-                        event: "FACEBOOK"
+                        event: 'FACEBOOK'
                     });
                     window.sessionStorage.setItem('username',response.name);
                     this.props.inputState(false);
@@ -53,7 +53,7 @@ class FacebookButton extends Component {
     }
 
     render(){
-        return (<button type="button" className="facebook-button" onClick={this.handleClick}/>)
+        return (<button type='button' className='facebook-button' onClick={this.handleClick}/>)
     }
 }
 

@@ -5,19 +5,17 @@ import LoginPage from '../component/LoginPage';
 import WeatherService from '../component/Weather'
 import './Main.css';
 import {connect} from 'react-redux'
-import Chat from "./Chat";
+import Chat from './Chat';
 import Friend from '../page/Friend'
 import Loading from '../component/Loading'
-import socket from "../tools/getSocket";
-import {inputState, setLoading} from "../actions";
-import Setting from "./Setting";
+import socket from '../tools/getSocket';
+import {inputState, setLoading} from '../actions';
+import Setting from './Setting';
 
 const mapDispatchToProps = dispatch => {
     return {
         inputState: (state) => dispatch(inputState(state)),
-        setLoading: (state) => {
-            dispatch(setLoading(state))
-        }
+        setLoading: (state) => dispatch(setLoading(state))
     }
 };
 
@@ -40,7 +38,8 @@ class HomePage extends Component {
                     window.FB.api(
                         `/${response.authResponse.userId}/picture`,
                         'GET',
-                        {"redirect": "false"},
+                        {'redirect': 'false'},
+                        //TODO
                         (response) => {
                             this.props.setPicture(response.data.url)
                         }
@@ -50,7 +49,7 @@ class HomePage extends Component {
                         socket.emit('USER_LOGIN', {
                             nickname: response.name,
                             password: response.id,
-                            event: "FACEBOOK"
+                            event: 'FACEBOOK'
                         });
                         window.sessionStorage.setItem('username', response.name);
                         this.props.setLoading(false);
@@ -58,7 +57,7 @@ class HomePage extends Component {
                     });
                 }
                 else {
-                    if (window.sessionStorage.getItem("username")) {
+                    if (window.sessionStorage.getItem('username')) {
                         this.props.inputState(false);
                         this.props.setLoading(false);
                     }
@@ -86,8 +85,8 @@ class HomePage extends Component {
                     <React.Fragment>
                         <WeatherService/>
                         <Navbar/>
-                        <div className="container-fluid fill">
-                            <div className="row fill">
+                        <div className='container-fluid fill'>
+                            <div className='row fill'>
                                 <Slidebar/>
                                 {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}
                                 {this.props.mainAreaDisplayed === 'FRIEND' && <Friend/>}

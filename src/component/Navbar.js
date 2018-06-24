@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {inputState, setUserAvatar} from "../actions";
-import {avatarUrl} from "../tools/constant"
+import {connect} from 'react-redux';
+import {inputState, setUserAvatar} from '../actions';
+import {avatarUrl} from '../tools/constant'
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -32,7 +32,7 @@ class Nav extends Component {
 
     componentDidMount() {
         const userImg = avatarUrl(window.sessionStorage.getItem('username'));
-        return new Promise(function(resolve, reject){
+        return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = function(){
                 resolve()
@@ -44,22 +44,22 @@ class Nav extends Component {
         }).then(()=>{
             this.props.setUserAvatar(userImg)
         },()=>{
-            this.props.setUserAvatar(avatarUrl("default"))
+            this.props.setUserAvatar(avatarUrl('default'))
         })
     }
 
     render() {
         return (
-            <nav className="navbar navbar-dark sticky-top bg-dark">
-                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="">
+            <nav className='navbar navbar-dark sticky-top bg-dark'>
+                <a className='navbar-brand col-sm-3 col-md-2 mr-0' href=''>
                     <img
                         src={this.props.avatarUser}
-                        alt={window.sessionStorage.getItem('username')} className="image-size"/>
+                        alt={window.sessionStorage.getItem('username')} className='image-size'/>
                     {window.sessionStorage.getItem('username')}
                 </a>
 
-                <ul className="navbar-nav px-3">
-                    <button type="button" className="btn btn-dark" onClick={this.handleClick}>Log out</button>
+                <ul className='navbar-nav px-3'>
+                    <button type='button' className='btn btn-dark' onClick={this.handleClick}>Log out</button>
                 </ul>
             </nav>
         );

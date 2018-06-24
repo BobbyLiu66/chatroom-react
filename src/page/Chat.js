@@ -4,9 +4,9 @@ import './Chat.css'
 import socket from '../tools/getSocket';
 import FriendList from '../component/FriendList'
 import MessageList from '../component/MessageList'
-import {avatarUrl} from "../tools/constant";
-import {setFriendAvatar} from "../actions";
-import {connect} from "react-redux";
+import {avatarUrl} from '../tools/constant';
+import {setFriendAvatar} from '../actions';
+import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
     return {avatarUser: state.avatarUser, avatarFriend: state.avatarFriend};
@@ -60,16 +60,17 @@ class ChatPage extends Component {
             }],
             inputMessage: ''
         });
-        let newFriendList = this.state.friendList;
-        newFriendList.map((friend) => {
-            if (friend.roomName === this.state.roomName) {
-                friend.message = message
-            }
-            return friend
-        });
-        this.setState({
-            friendList: newFriendList
-        });
+        this.setState((prevState) => {
+            prevState.map((friend) => {
+                if (friend.roomName === this.state.roomName) {
+                    friend.message = message
+                }
+                return friend
+            });
+            return ({
+                friendList: prevState.friendList
+            })
+        })
 
     }
 
@@ -84,8 +85,7 @@ class ChatPage extends Component {
     componentDidMount() {
         socket.on('LOAD_HISTORY', (data, prevData) => {
             this.setState((prevState) => {
-                let newFriendList = prevState.friendList;
-                newFriendList.map((friend) => {
+                prevState.friendList.map((friend) => {
                     if (friend.roomName === prevData.roomName) {
                         friend.message.status = true
                     }
@@ -93,7 +93,7 @@ class ChatPage extends Component {
                 });
                 return ({
                     chatMessage: data.message,
-                    friendList: newFriendList
+                    friendList: prevState.friendList
                 })
             });
 
@@ -102,23 +102,23 @@ class ChatPage extends Component {
         socket.on('FRIEND_LIST', (data) => {
             data.message.map((friend) => {
                 friend.imgUrl = avatarUrl(friend.friend);
-                return new Promise(function (resolve, reject) {
+                return new Promise((resolve, reject) => {
                     const img = new Image();
-                    img.onload = function () {
+                    img.onload = () => {
                         resolve()
                     };
-                    img.onerror = function () {
+                    img.onerror = () => {
                         reject()
                     };
                     img.src = friend.imgUrl
                 }).catch(() => {
-                    friend.imgUrl = avatarUrl("default");
+                    friend.imgUrl = avatarUrl('default');
                     this.setState({
                         friendList: data.message
                     });
                 })
             });
-            data.err ? this.setState({error: "Try again later"}) : this.setState({friendList: data.message});
+            data.err ? this.setState({error: 'Try again later'}) : this.setState({friendList: data.message});
         });
 
         socket.on('ADD_FRIEND_SUCCESS', (data, friendName) => {
@@ -130,7 +130,7 @@ class ChatPage extends Component {
         });
 
         socket.on('NEW_MESSAGE', (data) => {
-            let newFriendList = this.state.friendList;
+            const newFriendList = this.state.friendList;
             newFriendList.map((friend) => {
                 if (friend.roomName === data.roomName) {
                     friend.message = data;
@@ -150,11 +150,11 @@ class ChatPage extends Component {
     }
 
     componentWillUnmount() {
-        socket.off("LOAD_HISTORY");
-        socket.off("FRIEND_LIST");
-        socket.off("ADD_FRIEND_SUCCESS");
-        socket.off("NEW_MESSAGE");
-        socket.off("reconnect");
+        socket.off('LOAD_HISTORY');
+        socket.off('FRIEND_LIST');
+        socket.off('ADD_FRIEND_SUCCESS');
+        socket.off('NEW_MESSAGE');
+        socket.off('reconnect');
     }
 
     componentDidUpdate() {
@@ -163,24 +163,24 @@ class ChatPage extends Component {
 
     render() {
         return (
-            <div className="col-md-11">
-                <div className="row input-area">
-                    <div className="col-md-3 left-area">
+            <div className='col-md-11'>
+                <div className='row input-area'>
+                    <div className='col-md-3 left-area'>
                         <FriendList data={this.state.friendList} handleClick={this.handleClick}/>
                     </div>
-                    <div className="col-md-7 offset-1">
-                        <div className="message-area" ref="messageList">
+                    <div className='col-md-7 offset-1'>
+                        <div className='message-area' ref='messageList'>
                             <MessageList data={this.state.chatMessage} imgUrl={this.props}/>
                         </div>
                     </div>
                 </div>
-                {this.state.inputArea && <div className="row input-bar">
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="Input here ..."
+                {this.state.inputArea && <div className='row input-bar'>
+                    <div className='input-group mb-3'>
+                        <input type='text' className='form-control' placeholder='Input here ...'
                                value={this.state.inputMessage} onChange={this.handleChange}
-                               aria-label="Input here ..."/>
-                        <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button"
+                               aria-label='Input here ...'/>
+                        <div className='input-group-append'>
+                            <button className='btn btn-outline-secondary' type='button'
                                     onClick={this.handleSubmit}>Send
                             </button>
                         </div>

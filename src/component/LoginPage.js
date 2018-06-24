@@ -2,15 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './LoginPage.css'
 import socket from '../tools/getSocket'
-import {inputState} from "../actions";
+import {inputState} from '../actions';
 import Canvas from './Canvas';
 import Facebook from './Facebook';
 
-const INPUT_ERROR_STYLE = "text-danger form-text";
+const INPUT_ERROR_STYLE = 'text-danger form-text';
 
 const displayMessage = {
     LOGIN: 'Login Here',
-    FRIEND: "Friend's Name"
+    FRIEND: `Friend's Name`
 };
 
 const labelMessage = {
@@ -50,14 +50,14 @@ class Login extends Component {
         });
         event.preventDefault();
         if (this.validateInput()) {
-            if (this.props.currentStatus === "LOGIN") {
+            if (this.props.currentStatus === 'LOGIN') {
                 socket.emit('USER_LOGIN', {
                     nickname: this.state.inputValue,
                     password: this.state.inputPassword,
                     event: event.target.value
                 });
             }
-            else if (this.props.currentStatus === "FRIEND") {
+            else if (this.props.currentStatus === 'FRIEND') {
                 socket.emit('ADD_FRIEND', {
                     inviteName: this.state.inputValue,
                     nickname: window.sessionStorage.getItem('username'),
@@ -74,7 +74,7 @@ class Login extends Component {
 
     handleChange(event) {
         event.preventDefault();
-        if (event.target.id === "inputValue") {
+        if (event.target.id === 'inputValue') {
             this.setState({inputValue: event.target.value});
         }
         else {
@@ -83,7 +83,7 @@ class Login extends Component {
     }
 
     validateInput() {
-        let state = {status: true};
+        const state = {status: true};
         if (this.state.inputValue.length < 5) {
             state.status = false;
             state.inputValueMessage = 'nick name should be more than 5 character';
@@ -107,7 +107,7 @@ class Login extends Component {
 
     componentDidMount() {
         socket.on('REQUEST_RESULT', (data) => {
-            if(data.event !== "FACEBOOK"){
+            if(data.event !== 'FACEBOOK'){
                 if (data.err) {
                     this.setState({
                         inputValueMessage: data.err,
@@ -161,30 +161,30 @@ class Login extends Component {
         return (
             <React.Fragment>
                 <Canvas/>
-                <div className="text-center login-page">
+                <div className='text-center login-page'>
                     {window.sessionStorage.getItem('username') &&
-                    <button type="button" className="close close-button" aria-label="Close" onClick={this.handleClick}>
-                        <span aria-hidden="true">&times;</span>
+                    <button type='button' className='close close-button' aria-label='Close' onClick={this.handleClick}>
+                        <span aria-hidden='true'>&times;</span>
                     </button>
                     }
-                    <form className="form-signin">
+                    <form className='form-signin'>
                         {this.state.alertMessageStatus &&
-                        <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div className='alert alert-warning alert-dismissible fade show' role='alert'>
                             {this.state.alertMessage}
                         </div>}
-                        <h1 className="h3 mb-3 font-weight-bold">{displayMessage[this.props.currentStatus]}</h1>
+                        <h1 className='h3 mb-3 font-weight-bold'>{displayMessage[this.props.currentStatus]}</h1>
 
-                        <div className="form-group">
-                            <input id="inputValue" className="form-control" type="text"
+                        <div className='form-group'>
+                            <input id='inputValue' className='form-control' type='text'
                                    placeholder={labelMessage[this.props.currentStatus]}
                                    value={this.state.inputValue} onChange={this.handleChange}
                                    required autoFocus/>
                             {this.state.inputValueMessage &&
                             <span className={this.state.inputValueMessageStyle}>{this.state.inputValueMessage}</span>}
                         </div>
-                        {this.props.currentStatus === "LOGIN" &&
-                        <div className="form-group">
-                            <input type="password" className="form-control" placeholder="password"
+                        {this.props.currentStatus === 'LOGIN' &&
+                        <div className='form-group'>
+                            <input type='password' className='form-control' placeholder='password'
                                    value={this.state.inputPassword} onChange={this.handleChange}
                                    required/>
                             {this.state.inputPasswordMessage &&
@@ -193,13 +193,13 @@ class Login extends Component {
                         </div>
                         }
 
-                        <div className="form-group">
-                            <button className="btn btn-lg btn-primary btn-block submit-button" type="submit"
+                        <div className='form-group'>
+                            <button className='btn btn-lg btn-primary btn-block submit-button' type='submit'
                                     onClick={this.handleSubmit}
-                                    value="submit" disabled={this.state.disableButton}>Submit
+                                    value='submit' disabled={this.state.disableButton}>Submit
                             </button>
                         </div>
-                        {this.props.currentStatus === "LOGIN" && <Facebook/>}
+                        {this.props.currentStatus === 'LOGIN' && <Facebook/>}
                     </form>
                 </div>
             </React.Fragment>
