@@ -34,16 +34,16 @@ class Nav extends Component {
         const userImg = avatarUrl(window.sessionStorage.getItem('username'));
         return new Promise((resolve, reject) => {
             const img = new Image();
-            img.onload = function(){
+            img.onload = () => {
                 resolve()
             };
-            img.onerror = function(){
+            img.onerror = () => {
                 reject()
             };
             img.src = userImg
-        }).then(()=>{
+        }).then(() => {
             this.props.setUserAvatar(userImg)
-        },()=>{
+        }, () => {
             this.props.setUserAvatar(avatarUrl('default'))
         })
     }

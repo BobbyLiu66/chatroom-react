@@ -39,7 +39,8 @@ class FriendList extends Component {
         });
 
         socket.on('LOAD_FRIEND_LIST', (data) => {
-            data.newFriendList.map((friend) => {
+            const friendList = {...data.newFriendList};
+            friendList.map((friend) => {
                 friend.imgUrl = avatarUrl(friend.friend);
                 return new Promise((resolve, reject) => {
                     const img = new Image();
@@ -53,12 +54,12 @@ class FriendList extends Component {
                 }).catch(() => {
                     friend.imgUrl = avatarUrl('default');
                     this.setState({
-                        addFriendList: data.newFriendList
+                        addFriendList: friendList
                     });
                 })
             });
             this.setState({
-                addFriendList: data.newFriendList
+                addFriendList: friendList
             })
         })
     }

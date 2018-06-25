@@ -105,7 +105,6 @@ class Setting extends Component {
                                 borderRadius={this.state.borderRadius}
                                 height={this.state.height}
                                 image={this.state.image}
-                                className='editor-canvas'
                             />
                         </div>
                     </Dropzone>

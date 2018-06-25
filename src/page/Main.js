@@ -35,25 +35,30 @@ class HomePage extends Component {
             });
             window.FB.getLoginStatus((response) => {
                 if (response.authResponse) {
-                    window.FB.api(
-                        `/${response.authResponse.userId}/picture`,
-                        'GET',
-                        {'redirect': 'false'},
-                        //TODO
-                        (response) => {
-                            this.props.setPicture(response.data.url)
-                        }
-                    );
-
-                    window.FB.api('/me', 'GET', (response) => {
+                    window.FB.api('/me', 'GET', (res) => {
                         socket.emit('USER_LOGIN', {
-                            nickname: response.name,
-                            password: response.id,
+                            nickname: res.name,
+                            password: res.id,
                             event: 'FACEBOOK'
                         });
-                        window.sessionStorage.setItem('username', response.name);
+                        window.sessionStorage.setItem('username', res.name);
                         this.props.setLoading(false);
                         this.props.inputState(false);
+                    }).then(()=>{
+                        window.FB.api(
+                            `/${response.authResponse.userId}/picture`,
+                            'GET',
+                            {'redirect': 'false'},
+                            (res) => {
+                                socket.emit('AVATAR', {
+                                    nickname: window.sessionStorage.getItem('username'),
+                                    photo: this.editor.getImage().toDataURL('image/png'),
+                                    fileType: this.state.fileType
+                                });
+                                //TODO
+                                //this.props.setPicture(res.data.url)
+                            }
+                        );
                     });
                 }
                 else {

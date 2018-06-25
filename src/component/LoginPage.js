@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-    return { currentStatus: state.currentStatus };
+    return {currentStatus: state.currentStatus};
 };
 
 class Login extends Component {
@@ -107,7 +107,7 @@ class Login extends Component {
 
     componentDidMount() {
         socket.on('REQUEST_RESULT', (data) => {
-            if(data.event !== 'FACEBOOK'){
+            if (data.event !== 'FACEBOOK') {
                 if (data.err) {
                     this.setState({
                         inputValueMessage: data.err,
@@ -116,8 +116,8 @@ class Login extends Component {
                     })
                 }
                 else {
-                    window.sessionStorage.setItem('username',this.state.inputValue);
-                    window.sessionStorage.setItem('avatar',data.avatar);
+                    window.sessionStorage.setItem('username', this.state.inputValue);
+                    window.sessionStorage.setItem('avatar', data.avatar);
                     this.setState({
                         alertMessageStatus: true,
                         alertMessage: 'Login success!',

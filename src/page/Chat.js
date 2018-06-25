@@ -30,7 +30,6 @@ class ChatPage extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
-        socket.emit('FRIEND_LIST', {nickname: window.sessionStorage.getItem('username')})
     }
 
     handleClick(result) {
@@ -83,6 +82,7 @@ class ChatPage extends Component {
     }
 
     componentDidMount() {
+        socket.emit('FRIEND_LIST', {nickname: window.sessionStorage.getItem('username')});
         socket.on('LOAD_HISTORY', (data, prevData) => {
             this.setState((prevState) => {
                 prevState.friendList.map((friend) => {
@@ -130,7 +130,7 @@ class ChatPage extends Component {
         });
 
         socket.on('NEW_MESSAGE', (data) => {
-            const newFriendList = this.state.friendList;
+            const newFriendList = {...this.state.friendList};
             newFriendList.map((friend) => {
                 if (friend.roomName === data.roomName) {
                     friend.message = data;

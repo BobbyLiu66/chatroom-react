@@ -10,9 +10,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         inputState: (state) => dispatch(inputState(state)),
-        setLoading: (state) => {
-            dispatch(setLoading(state))
-        }
+        setLoading: (state) => dispatch(setLoading(state))
     }
 };
 
