@@ -3,7 +3,7 @@ import Navbar from '../component/Navbar';
 import Slidebar from '../component/Slidebar'
 import LoginPage from '../component/LoginPage';
 import WeatherService from '../component/Weather'
-import './Main.css';
+import './page.css';
 import {connect} from 'react-redux'
 import Chat from './Chat';
 import Friend from '../page/Friend'
@@ -49,7 +49,7 @@ class HomePage extends Component {
                             `/${response.authResponse.userId}/picture`,
                             'GET',
                             {'redirect': 'false'},
-                            (res) => {
+                            () => {
                                 socket.emit('AVATAR', {
                                     nickname: window.sessionStorage.getItem('username'),
                                     photo: this.editor.getImage().toDataURL('image/png'),

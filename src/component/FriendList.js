@@ -6,7 +6,7 @@ const FriendList = (props) => {
         let displayTime = messageTime.getMinutes() < 10 ? `${messageTime.getHours()}:0${messageTime.getMinutes()}` : `${messageTime.getHours()}:${messageTime.getMinutes()}`;
         return (
             <div className='row display-area' onClick={() => props.handleClick(result)} key={result.roomName}>
-                <div className='col-md-3 time'>
+                <div className='col-md-3 padding'>
                     <img src={result.imgUrl} alt=''
                          className='image-size'/>
                     {!result.message.status && result.message.speaker !== window.sessionStorage.getItem('username') &&
@@ -14,7 +14,7 @@ const FriendList = (props) => {
                 </div>
                 <div className='col-md-9'>
                     <div className='row'>
-                        <div className='col-md-12'><p className='text-center time'>{displayTime}</p></div>
+                        <div className='col-md-12'><p className='text-center padding'>{displayTime}</p></div>
                         <div className='col-md-12'><p
                             className='text-truncate'>{result.message.messageContent}</p>
                         </div>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import './Chat.css'
 import socket from '../tools/getSocket';
 import FriendList from '../component/FriendList'
 import MessageList from '../component/MessageList'

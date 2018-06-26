@@ -11,9 +11,9 @@ const MessageList = (props) => {
         }
         flag = false;
         return (
-            <div className='row message-block' key={chatMessage.messageTime}>
+            <div className='row padding' key={chatMessage.messageTime}>
                 <div className='col-sm-12'>
-                    {displayTime && <p className='text-center time'>{displayTime}</p>}
+                    {displayTime && <p className='text-center padding'>{displayTime}</p>}
                 </div>
                 <div className='col-sm-2 avatar'>
                     {chatMessage.speaker !== window.sessionStorage.getItem('username') && chatMessage.speaker !== null &&

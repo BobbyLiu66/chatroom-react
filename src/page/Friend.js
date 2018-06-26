@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './Chat.css'
 import socket from '../tools/getSocket';
 import {addFriend} from '../actions';
 import {connect} from 'react-redux'
@@ -95,7 +94,7 @@ class FriendList extends Component {
                 <div className='row input-area'>
                     <div className='col-md-3 left-area'>
                         <div className='col-md-12'>
-                            <div className='input-group mb-3 image text-center'>
+                            <div className='input-group mb-3 padding text-center'>
                                 <button className='btn btn-outline-secondary add-friend' value='ADD' type='button'
                                         onClick={this.handleClick}>Add New Friend
                                 </button>

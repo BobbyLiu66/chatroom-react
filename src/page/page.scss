@@ -1,0 +1,93 @@
+$primary-color: #e7e7e7;
+
+%padding-area {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+@mixin image($property) {
+  margin: 10px;
+  height: $property;
+  width: $property;
+  border-radius: 50%;
+}
+
+.input-area {
+  height: 100%;
+}
+
+.message-area {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.border-display {
+  @extend %padding-area;
+  background-color: $primary-color;
+  border-radius: 15px;
+}
+
+//time message-block image
+.padding {
+  @extend %padding-area;
+}
+
+p {
+  word-wrap: break-word;
+}
+
+.display-area {
+  border-bottom: solid $primary-color 1px;
+  border-top: solid $primary-color 1px;
+  padding: 7px;
+}
+
+.left-area {
+  border-right: solid $primary-color 1px;
+  overflow-y: scroll;
+}
+
+.input-bar {
+  position: absolute;
+  bottom: 70px;
+  left: 30%;
+  width: 65%;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #fff;
+  text-align: center;
+  background: red
+}
+
+.avatar {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.image-size {
+  @include image(35px);
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  display: inline-block;
+}
+
+.preview-image-size {
+  @include image(200px);
+  box-shadow: 0 0 10px #888888;
+}
+
+.fill {
+  height:100%;
+}
+
+.add-friend{
+  width: 100%;
+}
