@@ -1,0 +1,71 @@
+h3{
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.login-page {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 40px 0;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.form-signin {
+  width: 270px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom:{
+    right-radius: 0;
+    left-radius: 0;
+  }
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top:{
+    left-radius: 0;
+    right-radius: 0;
+  }
+}
+
+.close-button {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+
+.submit-button{
+  height: 40px;
+}
+
+.facebook-button{
+  width: 58px;
+  height: 58px;
+  background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Color/PNG/f-ogo_RGB_HEX-58.png");
+  &:hover{
+    background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Black/PNG/flogo-RGB-HEX-Blk-58.png");
+    transition: 0.5s;
+  }
+}
