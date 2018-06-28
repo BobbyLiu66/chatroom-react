@@ -1,5 +1,9 @@
-h3{
-  font-family: 'Poppins', sans-serif !important;
+@mixin border-style($position,$property){
+  margin-bottom: #{$property}px;
+  border-#{$position}:{
+    right-radius: 0;
+    left-radius: 0;
+  }
 }
 
 .login-page {
@@ -33,21 +37,13 @@ h3{
 }
 
 
-
+//TODO
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom:{
-    right-radius: 0;
-    left-radius: 0;
-  }
+  @include border-style(bottom, -1);
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top:{
-    left-radius: 0;
-    right-radius: 0;
-  }
+  @include border-style(top,10);
 }
 
 .close-button {
@@ -61,11 +57,73 @@ h3{
 }
 
 .facebook-button{
+  border-radius: 10px;
   width: 58px;
   height: 58px;
   background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Color/PNG/f-ogo_RGB_HEX-58.png");
   &:hover{
     background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Black/PNG/flogo-RGB-HEX-Blk-58.png");
     transition: 0.5s;
+  }
+}
+
+/*
+  navbar
+ */
+
+.navbar-custom{
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  text-align: center;
+}
+
+.navbar-left{
+  float: left;
+}
+
+.navbar-right{
+  float: right;
+}
+
+.navbar-item {
+  padding-left: 10px;
+  padding-right: 20px;
+  display: block;
+  color: white;
+  &:hover,&:visited,&:active,&:link{
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.sliderbar-custom{
+  height: 100%;
+  width: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  padding-top: 50px;
+}
+
+.sliderbar-img{
+  height: 50px;
+  width: 50px;
+}
+
+.sliderbar-item {
+  padding: 20px;
+  display: block;
+  color: white;
+  &:hover,&:visited,&:active,&:link{
+    color: white;
+    text-decoration: none;
   }
 }

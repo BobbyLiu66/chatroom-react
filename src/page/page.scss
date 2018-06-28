@@ -70,18 +70,18 @@ p {
 }
 
 .image-size {
-  @include image(35px);
   font-size: 20px;
   color: #fff;
   text-align: center;
   vertical-align: middle;
   line-height: 40px;
   display: inline-block;
+  @include image(35px);
 }
 
 .preview-image-size {
-  @include image(200px);
   box-shadow: 0 0 10px #888888;
+  @include image(200px);
 }
 
 .fill {
@@ -90,4 +90,11 @@ p {
 
 .add-friend{
   width: 100%;
+}
+
+.main{
+  width: 100%;
+  margin-left: 90px; /* Same as the width of the sidebar */
+  margin-top: 60px;
+  padding: 0 60px 0 0;
 }

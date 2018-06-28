@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {inputState, setUserAvatar} from '../actions';
 import {avatarUrl} from '../tools/constant'
+import './component.css'
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -48,20 +49,27 @@ class Nav extends Component {
         })
     }
 
+    /***
+     *
+     * @returns {*}
+     */
+
     render() {
         return (
-            <nav className='navbar navbar-dark sticky-top bg-dark'>
-                <a className='navbar-brand col-sm-3 col-md-2 mr-0' href=''>
+            <ul className='navbar-custom'>
+                <li className='navbar-left'>
+                    <a href="#" className='navbar-item'>
                     <img
                         src={this.props.avatarUser}
                         alt={window.sessionStorage.getItem('username')} className='image-size'/>
                     {window.sessionStorage.getItem('username')}
-                </a>
-
-                <ul className='navbar-nav px-3'>
-                    <button type='button' className='btn btn-dark' onClick={this.handleClick}>Log out</button>
-                </ul>
-            </nav>
+                    </a>
+                </li>
+                //FIXME
+                <li className='navbar-right'>
+                    <a href='#' className='navbar-item' onClick={this.handleClick}>Log out</a>
+                </li>
+            </ul>
         );
     }
 }

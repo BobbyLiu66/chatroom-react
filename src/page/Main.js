@@ -93,9 +93,11 @@ class HomePage extends Component {
                         <div className='container-fluid fill'>
                             <div className='row fill'>
                                 <Slidebar/>
-                                {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}
-                                {this.props.mainAreaDisplayed === 'FRIEND' && <Friend/>}
-                                {this.props.mainAreaDisplayed === 'SETTING' && <Setting/>}
+                                <div className='main'>
+                                    {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}
+                                    {this.props.mainAreaDisplayed === 'FRIEND' && <Friend/>}
+                                    {this.props.mainAreaDisplayed === 'SETTING' && <Setting/>}
+                                </div>
                             </div>
                         </div>
                     </React.Fragment>
