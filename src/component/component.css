@@ -1,11 +1,3 @@
-@mixin border-style($position,$property){
-  margin-bottom: #{$property}px;
-  border-#{$position}:{
-    right-radius: 0;
-    left-radius: 0;
-  }
-}
-
 .login-page {
   position: absolute;
   height: 100%;
@@ -15,61 +7,54 @@
   justify-content: center;
   padding: 40px 0 40px 0;
   font-weight: 400;
-  font-size: 24px;
-}
+  font-size: 24px; }
 
 .form-signin {
   width: 270px;
   padding: 15px;
-  margin: 0 auto;
-}
+  margin: 0 auto; }
 
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;
   height: auto;
   padding: 10px;
-  font-size: 16px;
-}
+  font-size: 16px; }
 
 .form-signin .form-control:focus {
-  z-index: 2;
-}
+  z-index: 2; }
 
 .form-signin input[type="email"] {
-  @include border-style(bottom, -1);
-}
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
 
 .form-signin input[type="password"] {
-  @include border-style(top,10);
-}
+  margin-bottom: 10px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0; }
 
 .close-button {
   position: absolute;
   left: 30px;
-  top: 30px;
-}
+  top: 30px; }
 
-.submit-button{
-  height: 40px;
-}
+.submit-button {
+  height: 40px; }
 
-.facebook-button{
+.facebook-button {
   border-radius: 10px;
   width: 58px;
   height: 58px;
-  background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Color/PNG/f-ogo_RGB_HEX-58.png");
-  &:hover{
+  background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Color/PNG/f-ogo_RGB_HEX-58.png"); }
+  .facebook-button:hover {
     background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Black/PNG/flogo-RGB-HEX-Blk-58.png");
-    transition: 0.5s;
-  }
-}
+    transition: 0.5s; }
 
 /*
   navbar
  */
-
-.navbar-custom{
+.navbar-custom {
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -78,29 +63,24 @@
   padding: 0;
   overflow: hidden;
   background-color: #333;
-  text-align: center;
-}
+  text-align: center; }
 
-.navbar-left{
-  float: left;
-}
+.navbar-left {
+  float: left; }
 
-.navbar-right{
-  float: right;
-}
+.navbar-right {
+  float: right; }
 
 .navbar-item {
   padding-left: 10px;
   padding-right: 20px;
   display: block;
-  color: white;
-  &:hover,&:visited,&:active,&:link{
+  color: white; }
+  .navbar-item:hover, .navbar-item:visited, .navbar-item:active, .navbar-item:link {
     color: white;
-    text-decoration: none;
-  }
-}
+    text-decoration: none; }
 
-.sliderbar-custom{
+.sliderbar-custom {
   height: 100%;
   width: 90px;
   position: fixed;
@@ -108,20 +88,18 @@
   left: 0;
   background-color: #333;
   overflow-x: hidden;
-  padding-top: 50px;
-}
+  padding-top: 50px; }
 
-.sliderbar-img{
+.sliderbar-img {
   height: 50px;
-  width: 50px;
-}
+  width: 50px; }
 
 .sliderbar-item {
   padding: 20px;
   display: block;
-  color: white;
-  &:hover,&:visited,&:active,&:link{
+  color: white; }
+  .sliderbar-item:hover, .sliderbar-item:visited, .sliderbar-item:active, .sliderbar-item:link {
     color: white;
-    text-decoration: none;
-  }
-}
+    text-decoration: none; }
+
+/*# sourceMappingURL=component.css.map */
