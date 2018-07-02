@@ -71,11 +71,11 @@ class FriendList extends Component {
         return data.map((result) => {
             return (
                 <div className='row display-area text-center' key={result.messageTime}>
-                    <div className='col-md-2'>
+                    <div className='col-2'>
                         <img src={result.imgUrl} alt={result.nickname}
                              className='image-size'/>
                     </div>
-                    <div className='col-md-9 offset-1'>
+                    <div className='col-9 offset-1'>
                         <p className='text-truncate '>{`${result.nickname} want to be friend with you`}
                         </p>
                         <button type='button' className='btn btn-outline-success btn-sm' value={result.nickname}
@@ -90,10 +90,10 @@ class FriendList extends Component {
 
     render() {
         return (
-            <div className='col-md-11'>
+            <div className='col-11'>
                 <div className='row input-area'>
-                    <div className='col-md-3 left-area'>
-                        <div className='col-md-12'>
+                    <div className='col-3 left-area'>
+                        <div className='col-12'>
                             <div className='input-group mb-3 padding text-center'>
                                 <button className='btn btn-outline-secondary add-friend' value='ADD' type='button'
                                         onClick={this.handleClick}>Add New Friend

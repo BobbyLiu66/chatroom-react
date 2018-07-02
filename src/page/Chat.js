@@ -162,12 +162,12 @@ class ChatPage extends Component {
 
     render() {
         return (
-            <div className='col-md-11'>
+            <div className='col-11'>
                 <div className='row input-area'>
-                    <div className='col-md-3 left-area'>
+                    <div className='col-3 left-area'>
                         <FriendList data={this.state.friendList} handleClick={this.handleClick}/>
                     </div>
-                    <div className='col-md-7 offset-1'>
+                    <div className='col-7 offset-1'>
                         <div className='message-area' ref='messageList'>
                             <MessageList data={this.state.chatMessage} imgUrl={this.props}/>
                         </div>

@@ -49,11 +49,6 @@ class Nav extends Component {
         })
     }
 
-    /***
-     *
-     * @returns {*}
-     */
-
     render() {
         return (
             <ul className='navbar-custom'>
