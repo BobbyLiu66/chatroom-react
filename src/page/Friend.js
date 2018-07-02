@@ -38,7 +38,7 @@ class FriendList extends Component {
         });
 
         socket.on('LOAD_FRIEND_LIST', (data) => {
-            const friendList = {...data.newFriendList};
+            const friendList = data.newFriendList;
             friendList.map((friend) => {
                 friend.imgUrl = avatarUrl(friend.friend);
                 return new Promise((resolve, reject) => {

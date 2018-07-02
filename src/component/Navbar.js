@@ -52,7 +52,7 @@ class Nav extends Component {
     render() {
         return (
             <ul className='navbar-custom'>
-                <li className='navbar-left'>
+                <li>
                     <a href="#" className='navbar-item'>
                     <img
                         src={this.props.avatarUser}
@@ -60,8 +60,8 @@ class Nav extends Component {
                     {window.sessionStorage.getItem('username')}
                     </a>
                 </li>
-                //FIXME
-                <li className='navbar-right'>
+
+                <li className='offsets-9'>
                     <a href='#' className='navbar-item' onClick={this.handleClick}>Log out</a>
                 </li>
             </ul>

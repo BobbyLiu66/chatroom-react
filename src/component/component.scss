@@ -70,6 +70,8 @@
  */
 
 .navbar-custom{
+  display: flex;
+  align-items: center;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -81,12 +83,8 @@
   text-align: center;
 }
 
-.navbar-left{
-  float: left;
-}
-
 .navbar-right{
-  float: right;
+  right: 0;
 }
 
 .navbar-item {
@@ -146,11 +144,20 @@
     .cols-#{$i}{
       width: $width
     }
+    .offsets-#{$i}{
+      margin-left: $width;
+    }
   }
 }
+//
+//
+//
+//.rows::after {
+//  content: "";
+//  clear: both;
+//  display: table;
+//}
 
-.rows::after {
-  content: "";
-  clear: both;
-  display: table;
+.flex-container{
+  display: flex;
 }
