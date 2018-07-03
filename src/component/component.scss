@@ -1,6 +1,6 @@
-@mixin border-style($position,$property){
+@mixin border-style($position,$property) {
   margin-bottom: #{$property}px;
-  border-#{$position}:{
+  border-#{$position}: {
     right-radius: 0;
     left-radius: 0;
   }
@@ -41,7 +41,7 @@
 }
 
 .form-signin input[type="password"] {
-  @include border-style(top,10);
+  @include border-style(top, 10);
 }
 
 .close-button {
@@ -50,16 +50,16 @@
   top: 30px;
 }
 
-.submit-button{
+.submit-button {
   height: 40px;
 }
 
-.facebook-button{
+.facebook-button {
   border-radius: 10px;
   width: 58px;
   height: 58px;
   background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Color/PNG/f-ogo_RGB_HEX-58.png");
-  &:hover{
+  &:hover {
     background-image: url("https://storage.googleapis.com/chatroom.geekliubo.com/facebook/Black/PNG/flogo-RGB-HEX-Blk-58.png");
     transition: 0.5s;
   }
@@ -69,7 +69,8 @@
   navbar
  */
 
-.navbar-custom{
+.navbar-custom {
+  height: 55px;
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -85,7 +86,7 @@
   text-align: center;
 }
 
-.navbar-right{
+.navbar-right {
   right: 0;
 }
 
@@ -94,13 +95,13 @@
   padding-right: 20px;
   display: block;
   color: white;
-  &:hover,&:visited,&:active,&:link{
+  &:hover, &:visited, &:active, &:link {
     color: white;
     text-decoration: none;
   }
 }
 
-.sliderbar-custom{
+.sliderbar-custom {
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -115,7 +116,7 @@
   }
 }
 
-.sliderbar-img{
+.sliderbar-img {
   height: 50px;
   width: 50px;
 }
@@ -129,28 +130,36 @@
     padding: 20px;
     display: block;
     color: white;
-    &:hover,&:visited,&:active,&:link{
+    &:hover, &:visited, &:active, &:link {
       color: white;
       text-decoration: none;
     }
   }
 }
 
-
 @for $i from 1 through 12 {
   $width: percentage($i / 12);
-  .offsets-#{$i}{
+  .offsets-#{$i} {
     margin-left: $width;
   }
   @media only screen and (min-width: 768px) {
-    .cols-#{$i}{
+    .cols-#{$i} {
       width: $width
     }
   }
 }
 
-.flex-container::after{
-    content: "";
-    clear: both;
-    display: table;
+.row-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.chat {
 }

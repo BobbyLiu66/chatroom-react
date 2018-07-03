@@ -1,8 +1,13 @@
 $primary-color: #e7e7e7;
 
-%padding-area {
+%padding-side {
   padding-top: 7px;
   padding-bottom: 7px;
+}
+
+%padding-width {
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 @mixin image($property) {
@@ -29,14 +34,17 @@ $primary-color: #e7e7e7;
 }
 
 .border-display {
-  @extend %padding-area;
+  @extend %padding-side;
   background-color: $primary-color;
   border-radius: 15px;
 }
 
 //time message-block image
 .padding {
-  @extend %padding-area;
+  @extend %padding-side;
+}
+.padding-message {
+  @extend %padding-width;
 }
 
 p {
@@ -50,6 +58,7 @@ p {
 }
 
 .left-area {
+  height: 100%;
   border-right: solid $primary-color 1px;
   overflow-y: scroll;
 }
@@ -106,5 +115,11 @@ p {
 
 .main {
   width: 100%;
-  margin-top: 60px;
+  margin-top: 50px;
+  margin-left: 90px;
+  height: 100%;
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+    margin-top: 60px;
+  }
 }

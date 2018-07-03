@@ -11,22 +11,22 @@ const MessageList = (props) => {
         }
         flag = false;
         return (
-            <div className='row padding' key={chatMessage.messageTime}>
-                <div className='col-12'>
+            <div className='flex-container padding' key={chatMessage.messageTime}>
+                <div className='cols-12'>
                     {displayTime && <p className='text-center padding'>{displayTime}</p>}
                 </div>
-                <div className='col-2 avatar'>
+                <div className='cols-2 avatar'>
                     {chatMessage.speaker !== window.sessionStorage.getItem('username') && chatMessage.speaker !== null &&
                     <img src={props.imgUrl.avatarFriend} alt={chatMessage.speaker}
                          className='image-size'/>
                     }
                 </div>
-                <div className='col-8 border-display'>
+                <div className='cols-6 border-display'>
                     {chatMessage.speaker === window.sessionStorage.getItem('username') ?
-                        <p className='text-justify float-right'>{chatMessage.messageContent}</p> :
-                        <p className='text-justify'>{chatMessage.messageContent}</p>}
+                        <p className='text-justify float-right padding-message'>{chatMessage.messageContent}</p> :
+                        <p className='text-justify padding-message'>{chatMessage.messageContent}</p>}
                 </div>
-                <div className='col-2 avatar'>
+                <div className='cols-2 avatar'>
                     {chatMessage.speaker === window.sessionStorage.getItem('username') &&
                     <img src={props.imgUrl.avatarUser} alt={chatMessage.speaker}
                          className='image-size'/>

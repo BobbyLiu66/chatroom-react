@@ -90,7 +90,7 @@ class HomePage extends Component {
                     <React.Fragment>
                         <WeatherService/>
                         <Navbar/>
-                            <div className='flex-container fill'>
+                            <div className='row-container fill'>
                                 <Slidebar/>
                                 <div className='main'>
                                     {this.props.mainAreaDisplayed === 'CHAT' && <Chat/>}

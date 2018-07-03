@@ -163,12 +163,12 @@ class ChatPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className='cols-11 offsets-1 fill'>
+                <div className='cols-11 fill'>
                     <div className='flex-container input-area'>
-                        <div className='cols-5 left-area'>
+                        <div className='cols-3 left-area'>
                             <FriendList data={this.state.friendList} handleClick={this.handleClick}/>
                         </div>
-                        <div className='cols-12'>
+                        <div className='cols-9'>
                             <div className='message-area' ref='messageList'>
                                 <MessageList data={this.state.chatMessage} imgUrl={this.props}/>
                             </div>
