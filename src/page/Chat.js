@@ -59,7 +59,7 @@ class ChatPage extends Component {
             inputMessage: ''
         });
         this.setState((prevState) => {
-            prevState.map((friend) => {
+            prevState.chatMessage.map((friend) => {
                 if (friend.roomName === this.state.roomName) {
                     friend.message = message
                 }
@@ -162,18 +162,20 @@ class ChatPage extends Component {
 
     render() {
         return (
-            <div className='col-11'>
-                <div className='row input-area'>
-                    <div className='col-3 left-area'>
-                        <FriendList data={this.state.friendList} handleClick={this.handleClick}/>
-                    </div>
-                    <div className='col-7 offset-1'>
-                        <div className='message-area' ref='messageList'>
-                            <MessageList data={this.state.chatMessage} imgUrl={this.props}/>
+            <React.Fragment>
+                <div className='cols-11 offsets-1 fill'>
+                    <div className='flex-container input-area'>
+                        <div className='cols-5 left-area'>
+                            <FriendList data={this.state.friendList} handleClick={this.handleClick}/>
+                        </div>
+                        <div className='cols-12'>
+                            <div className='message-area' ref='messageList'>
+                                <MessageList data={this.state.chatMessage} imgUrl={this.props}/>
+                            </div>
                         </div>
                     </div>
                 </div>
-                {this.state.inputArea && <div className='row input-bar'>
+                {this.state.inputArea && <div className='input-bar'>
                     <div className='input-group mb-3'>
                         <input type='text' className='form-control' placeholder='Input here ...'
                                value={this.state.inputMessage} onChange={this.handleChange}
@@ -185,7 +187,7 @@ class ChatPage extends Component {
                         </div>
                     </div>
                 </div>}
-            </div>
+            </React.Fragment>
         );
     }
 }

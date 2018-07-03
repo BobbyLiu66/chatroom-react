@@ -70,7 +70,9 @@
  */
 
 .navbar-custom{
+  top: 0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   position: fixed;
@@ -136,28 +138,19 @@
 
 
 @for $i from 1 through 12 {
-  .cols-#{$i}{
-    width: 100%;
+  $width: percentage($i / 12);
+  .offsets-#{$i}{
+    margin-left: $width;
   }
   @media only screen and (min-width: 768px) {
-    $width: percentage($i / 12);
     .cols-#{$i}{
       width: $width
     }
-    .offsets-#{$i}{
-      margin-left: $width;
-    }
   }
 }
-//
-//
-//
-//.rows::after {
-//  content: "";
-//  clear: both;
-//  display: table;
-//}
 
-.flex-container{
-  display: flex;
+.flex-container::after{
+    content: "";
+    clear: both;
+    display: table;
 }

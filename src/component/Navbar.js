@@ -53,16 +53,19 @@ class Nav extends Component {
         return (
             <ul className='navbar-custom'>
                 <li>
-                    <a href="#" className='navbar-item'>
                     <img
                         src={this.props.avatarUser}
-                        alt={window.sessionStorage.getItem('username')} className='image-size'/>
-                    {window.sessionStorage.getItem('username')}
+                        alt={window.sessionStorage.getItem('username')} className='image-size nav-item'/>
+                </li>
+
+                <li>
+                    <a href="#" className='navbar-item'>
+                        {window.sessionStorage.getItem('username')}
                     </a>
                 </li>
 
-                <li className='offsets-9'>
-                    <a href='#' className='navbar-item' onClick={this.handleClick}>Log out</a>
+                <li className='quit'>
+                    <a href='#' className='navbar-item' onClick={this.handleClick}>Quit</a>
                 </li>
             </ul>
         );
