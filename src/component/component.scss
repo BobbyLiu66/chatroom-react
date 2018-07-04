@@ -142,6 +142,9 @@
   .offsets-#{$i} {
     margin-left: $width;
   }
+  .cols-#{$i} {
+    width: 100%;
+  }
   @media only screen and (min-width: 768px) {
     .cols-#{$i} {
       width: $width
@@ -161,5 +164,7 @@
   align-items: center;
 }
 
-.chat {
+p {
+  word-break: keep-all;
+  text-overflow: ellipsis;
 }

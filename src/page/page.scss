@@ -112,14 +112,17 @@ p {
 .add-friend {
   width: 100%;
 }
+.list-area{
+  width: 60%;
+}
 
 .main {
   width: 100%;
   margin-top: 50px;
-  margin-left: 90px;
   height: 100%;
   @media only screen and (min-width: 768px) {
     width: 100%;
-    margin-top: 60px;
+    margin-left: 90px;
+    margin-top: 50px;
   }
 }
