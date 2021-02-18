@@ -3,7 +3,7 @@ import Navbar from '../component/Navbar';
 import Slidebar from '../component/Slidebar'
 import LoginPage from '../component/LoginPage';
 import WeatherService from '../component/Weather'
-import './page.css';
+import './page.scss';
 import {connect} from 'react-redux'
 import Chat from './Chat';
 import Friend from '../page/Friend'

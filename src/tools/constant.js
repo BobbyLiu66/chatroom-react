@@ -1,4 +1,4 @@
-export const weatherUrl = 'https://www.geekliubo.com:3002/weather?type=current';
+export const weatherUrl = 'http://localhost:3002/weather?type=current';
 export const imgUrl = 'https://storage.googleapis.com/chatroom.geekliubo.com/weather/';
 export const weatherCode = {
     sunny: 800,
