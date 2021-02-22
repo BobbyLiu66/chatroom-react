@@ -20,4 +20,17 @@ And I update the security level of this website by using SSL as well.
 ![](https://storage.googleapis.com/chatroom.geekliubo.com/github/add-friend-react.gif)
 #### Chat
 ![](https://storage.googleapis.com/chatroom.geekliubo.com/github/chat-react.gif)
+#### Basic chat room      
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/chat_basic.gif)
+    
+#### Clear chat message
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/clear_chat.gif)    
+   
+#### Create Chat Room
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/create_room.gif)
 
+#### Invite Friend
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/invite_friend.gif)
+
+#### Cooperate Whiteboard And Clear
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/whiteboard.gif)
