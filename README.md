@@ -15,11 +15,11 @@ And I update the security level of this website by using SSL as well.
 
 ### Screenshot 
 #### Main Page
-![](https://storage.googleapis.com/chatroom.geekliubo.com/github/main.gif)
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/main_chat.gif)
 #### Add Friend
-![](https://storage.googleapis.com/chatroom.geekliubo.com/github/add-friend-react.gif)
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/add-friend-react.gif)
 #### Chat
-![](https://storage.googleapis.com/chatroom.geekliubo.com/github/chat-react.gif)
+![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/chat-react.gif)
 #### Basic chat room      
 ![](https://github-bobby.s3-ap-southeast-2.amazonaws.com/chat_basic.gif)
     
