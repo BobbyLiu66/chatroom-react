@@ -6,7 +6,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.0",
     "gh-pages": "^1.1.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "popper": "^1.0.1",
     "react": "^16.4.1",
     "react-avatar-editor": "^11.0.4",
